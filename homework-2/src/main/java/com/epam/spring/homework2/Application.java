@@ -1,6 +1,5 @@
 package com.epam.spring.homework2;
 
-import com.epam.spring.homework2.beans.BeanB;
 import com.epam.spring.homework2.config.FirstConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
