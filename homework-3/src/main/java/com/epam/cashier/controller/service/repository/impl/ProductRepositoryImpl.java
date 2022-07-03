@@ -1,5 +1,6 @@
 package com.epam.cashier.controller.service.repository.impl;
 
+import com.epam.cashier.controller.service.exception.ProductNotFoundException;
 import com.epam.cashier.controller.service.model.Product;
 import com.epam.cashier.controller.service.repository.ProductRepository;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,7 @@ public class ProductRepositoryImpl implements ProductRepository {
                 .stream()
                 .filter(product -> product.getProductId() == id)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("product is not found!"));
+                .orElseThrow(() -> new ProductNotFoundException("product is not found!"));
     }
 
     @Override
@@ -37,7 +38,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         if (isDeleted) {
            productList.add(product);
         } else {
-            throw new RuntimeException("product is not found!");
+            throw new ProductNotFoundException("product is not found!");
         }
         return product;
     }

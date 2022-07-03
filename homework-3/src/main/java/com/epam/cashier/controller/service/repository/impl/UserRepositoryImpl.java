@@ -1,5 +1,6 @@
 package com.epam.cashier.controller.service.repository.impl;
 
+import com.epam.cashier.controller.service.exception.UserNotFoundException;
 import com.epam.cashier.controller.service.model.User;
 import com.epam.cashier.controller.service.repository.UserRepository;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ public class UserRepositoryImpl implements UserRepository {
         return userList.stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("User is not found!"));
+                .orElseThrow(() -> new UserNotFoundException("User is not found!"));
     }
 
     @Override
@@ -39,7 +40,7 @@ public class UserRepositoryImpl implements UserRepository {
         if (isDeleted) {
             userList.add(user);
         } else {
-            throw new RuntimeException("User is not found!");
+            throw new UserNotFoundException("user not found");
         }
         return user;
     }
