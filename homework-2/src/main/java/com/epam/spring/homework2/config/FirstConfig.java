@@ -32,5 +32,4 @@ public class FirstConfig {
     public BeanF beanF() {
         return new BeanF();
     }
-
 }

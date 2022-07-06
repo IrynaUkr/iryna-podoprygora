@@ -27,7 +27,7 @@ public class BeanE implements MyValidator {
     }
 
     @PreDestroy
-    public void preDestroyE(){
+    public void preDestroyE() {
         System.out.println("call method preDestroyE()");
     }
 

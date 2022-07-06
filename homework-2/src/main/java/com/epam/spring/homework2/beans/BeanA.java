@@ -20,7 +20,6 @@ public class BeanA implements InitializingBean, DisposableBean, MyValidator {
                 '}';
     }
 
-
     @Override
     public void afterPropertiesSet() throws Exception {
         System.out.println("call afterPropertiesSet() beanA");
