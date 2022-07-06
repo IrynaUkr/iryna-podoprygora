@@ -33,5 +33,5 @@ public class UserDto {
     private String address;
 
     //@NotBlank(message = "role shouldn't be empty", groups = OnCreate.class)
-    private Role role;
+     private Role role;
 }
