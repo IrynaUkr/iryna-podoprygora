@@ -2,6 +2,7 @@ package com.epam.cashier.controller.service.impl;
 
 import com.epam.cashier.controller.dto.ProductDto;
 import com.epam.cashier.controller.service.ProductService;
+import com.epam.cashier.controller.service.mapper.ProductMapper;
 import com.epam.cashier.controller.service.model.Product;
 import com.epam.cashier.controller.service.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,61 +22,34 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto getProduct(int id) {
         log.info(" get Product ");
         Product product = productRepository.getProduct(id);
-        return mapProductToProductDto(product);
+        return ProductMapper.INSTANCE.mapToproductDto(product);
     }
 
     @Override
     public List<ProductDto> listProduct() {
         log.info(" listProduct() ");
-        return productRepository
-                .getAllProducts()
-                .stream()
-                .map(this::mapProductToProductDto)
-                .collect(Collectors.toList());
+        List<Product> allProducts = productRepository.getAllProducts();
+        return ProductMapper.INSTANCE.mapToProductDtos(allProducts);
     }
 
     @Override
     public ProductDto createProduct(ProductDto productDTO) {
-        log.info("create PRODUCT"+productDTO.getCode());
-        Product pr =mapProductDtoToProduct(productDTO);
+        log.info("create PRODUCT" + productDTO.getCode());
+        Product pr = ProductMapper.INSTANCE.mapToProduct(productDTO);
         productRepository.create(pr);
-        return mapProductToProductDto(pr);
+        return ProductMapper.INSTANCE.mapToproductDto(pr);
     }
 
     @Override
     public ProductDto updateProduct(int id, ProductDto productDTO) {
-        log.info("updateproduct with id {}", id);
-        Product pr =mapProductDtoToProduct(productDTO);
-
-        return mapProductToProductDto(pr);
+        log.info("update product with id {}", id);
+        Product pr = ProductMapper.INSTANCE.mapToProduct(productDTO);
+        return ProductMapper.INSTANCE.mapToproductDto(pr);
     }
 
     @Override
     public void deleteProduct(int id) {
         log.info("deleteUser with email {}", id);
         productRepository.deleteProduct(id);
-    }
-
-    public ProductDto mapProductToProductDto(Product product) {
-        ProductDto productDto = ProductDto.builder()
-                .productId(product.getProductId())
-                .amount(product.getAmount())
-                .name(product.getName())
-                .description(product.getDescription())
-                .price(product.getPrice())
-                .code(product.getCode())
-                .build();
-        return productDto;
-    }
-
-    public Product mapProductDtoToProduct(ProductDto productDto) {
-        return Product.builder()
-                .productId(productDto.getProductId())
-                .amount(productDto.getAmount())
-                .name(productDto.getName())
-                .description(productDto.getDescription())
-                .price(productDto.getPrice())
-                .code(productDto.getCode())
-                .build();
     }
 }

@@ -2,6 +2,7 @@ package com.epam.cashier.controller.service.impl;
 
 import com.epam.cashier.controller.dto.UserDto;
 import com.epam.cashier.controller.service.UserService;
+import com.epam.cashier.controller.service.mapper.UserMapper;
 import com.epam.cashier.controller.service.model.User;
 import com.epam.cashier.controller.service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,56 +22,34 @@ public class UserServiceImpl implements UserService {
     public UserDto getUser(String email) {
         log.info(" get Users ");
         User user = userRepository.getUser(email);
-        return mapUserToUserDto(user);
+        return UserMapper.INSTANCE.mapToUserDto(user);
     }
 
     @Override
     public List<UserDto> listUsers() {
-        return userRepository.getAllUsers()
-                .stream()
-                .map(this::mapUserToUserDto)
-                .collect(Collectors.toList());
+        List<User> allUsers = userRepository.getAllUsers();
+        return UserMapper.INSTANCE.mapUserDtos(allUsers);
     }
 
     @Override
     public UserDto createUser(UserDto userDto) {
         log.info("createUser");
-        User user = mapUserDtoToUser(userDto);
+        User user = UserMapper.INSTANCE.mapToUser(userDto);
         user = userRepository.createUser(user);
-        return mapUserToUserDto(user);
+        return UserMapper.INSTANCE.mapToUserDto(user);
     }
 
     @Override
     public UserDto updateUser(String email, UserDto userDto) {
         log.info("updateUser with email {}", email);
-        User user = mapUserDtoToUser(userDto);
+        User user = UserMapper.INSTANCE.mapToUser(userDto);
         user = userRepository.updateUser(email, user);
-        return mapUserToUserDto(user);
+        return UserMapper.INSTANCE.mapToUserDto(user);
     }
 
     @Override
     public void deleteUser(String email) {
         log.info("deleteUser with email {}", email);
         userRepository.deleteUser(email);
-    }
-
-    private UserDto mapUserToUserDto(User user) {
-        return UserDto.builder()
-                .login(user.getLogin())
-                .email(user.getEmail())
-                .role(user.getRole())
-                .surname(user.getSurname())
-                .phoneNumber(user.getPhoneNumber())
-                .build();
-    }
-
-    private User mapUserDtoToUser(UserDto userDto) {
-        return User.builder()
-                .login(userDto.getLogin())
-                .email(userDto.getEmail())
-                .role(userDto.getRole())
-                .surname(userDto.getSurname())
-                .phoneNumber(userDto.getPhoneNumber())
-                .build();
     }
 }
