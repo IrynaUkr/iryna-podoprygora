@@ -28,7 +28,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User createUser(User user) {
-        //add real id from database
         userList.add(user);
         return user;
     }

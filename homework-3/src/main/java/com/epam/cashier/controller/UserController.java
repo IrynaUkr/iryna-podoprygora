@@ -38,8 +38,6 @@ public class UserController {
         return userService.getUser(email);
     }
 
-
-
     @DeleteMapping("/user/{email}")
     public ResponseEntity<Void> deleteUser(@PathVariable String email) {
         userService.deleteUser(email);

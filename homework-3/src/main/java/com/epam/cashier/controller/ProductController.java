@@ -1,9 +1,7 @@
 package com.epam.cashier.controller;
 
 import com.epam.cashier.controller.dto.ProductDto;
-import com.epam.cashier.controller.dto.UserDto;
 import com.epam.cashier.controller.service.ProductService;
-import com.epam.cashier.controller.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +12,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class ProductController {
-    private final UserService userService;
     private final ProductService productService;
 
     @ResponseStatus(HttpStatus.OK)
@@ -40,7 +37,6 @@ public class ProductController {
     public ProductDto getProduct(@PathVariable int id) {
         return productService.getProduct(id);
     }
-
 
     @DeleteMapping("/product/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable int id) {

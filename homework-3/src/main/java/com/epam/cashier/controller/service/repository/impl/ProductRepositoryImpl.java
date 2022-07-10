@@ -33,9 +33,9 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Product updateProduct(int id, Product product) {
-        boolean isDeleted = productList.removeIf(p -> p.getProductId()==id);
+        boolean isDeleted = productList.removeIf(p -> p.getProductId() == id);
         if (isDeleted) {
-           productList.add(product);
+            productList.add(product);
         } else {
             throw new RuntimeException("product is not found!");
         }

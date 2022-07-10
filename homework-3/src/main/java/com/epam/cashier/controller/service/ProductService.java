@@ -1,7 +1,6 @@
 package com.epam.cashier.controller.service;
 
 import com.epam.cashier.controller.dto.ProductDto;
-import com.epam.cashier.controller.dto.UserDto;
 
 import java.util.List;
 
