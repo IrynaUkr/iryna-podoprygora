@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto getProduct(int id) {
         log.info(" get Product ");
         Product product = productRepository.getProduct(id);
-        return ProductMapper.INSTANCE.mapToproductDto(product);
+        return ProductMapper.INSTANCE.mapToProductDto(product);
     }
 
     @Override
@@ -37,14 +37,14 @@ public class ProductServiceImpl implements ProductService {
         log.info("create PRODUCT" + productDTO.getCode());
         Product pr = ProductMapper.INSTANCE.mapToProduct(productDTO);
         productRepository.create(pr);
-        return ProductMapper.INSTANCE.mapToproductDto(pr);
+        return ProductMapper.INSTANCE.mapToProductDto(pr);
     }
 
     @Override
     public ProductDto updateProduct(int id, ProductDto productDTO) {
         log.info("update product with id {}", id);
         Product pr = ProductMapper.INSTANCE.mapToProduct(productDTO);
-        return ProductMapper.INSTANCE.mapToproductDto(pr);
+        return ProductMapper.INSTANCE.mapToProductDto(pr);
     }
 
     @Override

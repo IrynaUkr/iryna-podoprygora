@@ -14,8 +14,8 @@ public class Receipt {
     private Double sum;
     private Double amount;
     private Date date;
-    private Integer idUser;                     //author
+    private Integer idUser;
     private OperationStatus status;
-    private OperationType operationType;      //sale or refund of goods
+    private OperationType operationType;
     private ArrayList<ReceiptProducts> receiptProducts;
 }

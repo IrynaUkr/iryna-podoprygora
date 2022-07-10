@@ -10,7 +10,10 @@ import java.util.List;
 @Mapper
 public interface ProductMapper {
     ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
-    ProductDto mapToproductDto(Product product);
+
+    ProductDto mapToProductDto(Product product);
+
     Product mapToProduct(ProductDto productDto);
+
     List<ProductDto> mapToProductDtos(List<Product> products);
 }

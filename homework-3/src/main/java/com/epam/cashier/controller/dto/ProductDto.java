@@ -1,11 +1,14 @@
 package com.epam.cashier.controller.dto;
 
 import com.epam.cashier.controller.dto.group.OnCreate;
+import com.epam.cashier.controller.dto.group.OnUpdate;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 @Data
 @Builder
@@ -21,10 +24,10 @@ public class ProductDto {
 
     private String description;
 
-  //  @NotBlank(message = "name shouldn't be empty ", groups = OnCreate.class)
+    @Positive(message="price should be positive", groups = {OnCreate.class, OnUpdate.class})
     private Double price;
 
-  //  @NotBlank(message = "name shouldn't be empty ", groups = OnCreate.class)
+    @PositiveOrZero(message="amount should be positive or zero",groups = {OnCreate.class, OnUpdate.class})
     private Double amount;
-    private String uom; //units of measure
+    private String uom;
 }

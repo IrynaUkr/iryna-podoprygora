@@ -11,7 +11,6 @@ import java.util.List;
 @Component
 public class UserRepositoryImpl implements UserRepository {
 
-
     private final List<User> userList = new ArrayList<>();
 
     @Override
@@ -29,7 +28,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User createUser(User user) {
-        //add real id from database
         userList.add(user);
         return user;
     }

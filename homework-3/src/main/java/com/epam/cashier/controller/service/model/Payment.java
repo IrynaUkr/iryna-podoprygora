@@ -15,5 +15,4 @@ public class Payment {
     private OperationStatus status;
     private OperationType type;
     private String description;
-
 }

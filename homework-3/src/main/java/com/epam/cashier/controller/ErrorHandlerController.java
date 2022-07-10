@@ -5,7 +5,6 @@ import com.epam.cashier.controller.service.model.Error;
 import com.epam.cashier.controller.service.model.ErrorType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -29,7 +28,6 @@ public class ErrorHandlerController {
                         ErrorType.VALIDATION_ERROR_TYPE,
                         LocalDateTime.now())
                 ).collect(Collectors.toList());
-
     }
 
     @ExceptionHandler(ServiceException.class)
@@ -47,5 +45,4 @@ public class ErrorHandlerController {
                 hm.getMethod().getName(), ex);
         return new Error(ex.getMessage(), ErrorType.FATAL_ERROR_TYPE, LocalDateTime.now());
     }
-
 }

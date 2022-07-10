@@ -10,9 +10,10 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+
     UserDto mapToUserDto(User user);
+
     User mapToUser(UserDto userDto);
 
     List<UserDto> mapUserDtos(List<User> users);
-
 }
