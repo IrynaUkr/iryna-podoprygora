@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class MyBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        if(bean instanceof MyValidator){
+        if (bean instanceof MyValidator) {
             System.out.println(bean.getClass().getSimpleName() +
                     " in postProcessAfterInitialization will be validated:");
             ((MyValidator) bean).validate();

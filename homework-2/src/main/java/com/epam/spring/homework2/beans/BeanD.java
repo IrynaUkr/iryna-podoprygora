@@ -2,7 +2,6 @@ package com.epam.spring.homework2.beans;
 
 import org.springframework.beans.factory.annotation.Value;
 
-
 public class BeanD implements MyValidator {
     @Value("${beanD.name}")
     private String name;
