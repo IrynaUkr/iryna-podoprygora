@@ -6,5 +6,4 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan("com.epam.spring.homework1.others")
 public class OtherConfig {
-
 }

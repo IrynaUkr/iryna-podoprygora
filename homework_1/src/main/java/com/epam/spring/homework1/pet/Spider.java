@@ -7,6 +7,7 @@ public class Spider implements Animal {
     public Spider() {
 
     }
+
     @Override
     public String toString() {
         return "Spider";

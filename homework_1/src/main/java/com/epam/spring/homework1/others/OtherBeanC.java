@@ -11,7 +11,6 @@ public class OtherBeanC {
     private BeanC beanC;
 
     public OtherBeanC() {
-        System.out.println(this.getClass().getSimpleName()
-                + " , " + beanC + " was injected through the field");
+        System.out.println(this.getClass().getSimpleName() + " , " + beanC + " was injected through the field");
     }
 }

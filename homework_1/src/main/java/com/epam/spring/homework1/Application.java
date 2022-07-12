@@ -12,8 +12,8 @@ public class Application {
         PetService petService = context.getBean(PetService.class);
         petService.printPet();
         Object cheetah = context.getBean("cheetah");
-        System.out.println("by name: "+ cheetah);
+        System.out.println("by name: " + cheetah);
         Cheetah cheetah1 = context.getBean("cheetah", Cheetah.class);
-        System.out.println("by class: "+ cheetah1);
+        System.out.println("by class: " + cheetah1);
     }
 }

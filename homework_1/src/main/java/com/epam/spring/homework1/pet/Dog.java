@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 @Order(1)
 public class Dog implements Animal {
     public Dog() {
-
     }
 
     @Override
