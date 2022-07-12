@@ -8,6 +8,7 @@ import javax.annotation.PreDestroy;
 @Component
 public class BeanE implements MyValidator {
     private String name;
+
     private int value;
 
     public BeanE() {

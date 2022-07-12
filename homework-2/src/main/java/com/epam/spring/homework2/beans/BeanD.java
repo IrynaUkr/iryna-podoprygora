@@ -3,6 +3,7 @@ package com.epam.spring.homework2.beans;
 public class BeanD implements MyValidator {
 
     private final String name;
+
     private final int value;
 
     public BeanD(String name, int value) {

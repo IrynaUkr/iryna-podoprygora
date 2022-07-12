@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BeanF implements MyValidator {
     private String name;
+
     private int value;
 
     public BeanF() {

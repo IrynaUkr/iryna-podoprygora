@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BeanA implements InitializingBean, DisposableBean, MyValidator {
     private String name;
+
     private int value;
 
     public BeanA() {
