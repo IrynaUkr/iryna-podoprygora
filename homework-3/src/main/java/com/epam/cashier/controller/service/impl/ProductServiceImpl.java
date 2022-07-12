@@ -36,8 +36,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto createProduct(ProductDto productDTO) {
-        log.info("create PRODUCT"+productDTO.getCode());
-        Product pr =mapProductDtoToProduct(productDTO);
+        log.info("create PRODUCT" + productDTO.getCode());
+        Product pr = mapProductDtoToProduct(productDTO);
         productRepository.create(pr);
         return mapProductToProductDto(pr);
     }
@@ -45,8 +45,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto updateProduct(int id, ProductDto productDTO) {
         log.info("updateproduct with id {}", id);
-        Product product =mapProductDtoToProduct(productDTO);
-        product=productRepository.updateProduct(id,product);
+        Product product = mapProductDtoToProduct(productDTO);
+        product = productRepository.updateProduct(id, product);
         return mapProductToProductDto(product);
     }
 
