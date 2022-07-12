@@ -15,10 +15,7 @@ public class BeanE implements MyValidator {
 
     @Override
     public String toString() {
-        return "BeanE{" +
-                "name='" + name + '\'' +
-                ", value=" + value +
-                '}';
+        return "BeanE{" + "name='" + name + '\'' + ", value=" + value + '}';
     }
 
     @PostConstruct

@@ -1,23 +1,18 @@
 package com.epam.spring.homework2.beans;
 
-import org.springframework.beans.factory.annotation.Value;
-
-
 public class BeanB implements MyValidator {
-    @Value("${beanB.name}")
-    private String name;
-    @Value("${beanB.value}")
-    private int value;
+    private final String name;
 
-    public BeanB() {
+    private final int value;
+
+    public BeanB(String name, int value) {
+        this.name = name;
+        this.value = value;
     }
 
     @Override
     public String toString() {
-        return "BeanB{" +
-                "name='" + name + '\'' +
-                ", value=" + value +
-                '}';
+        return "BeanB{" + "name='" + name + '\'' + ", value=" + value + '}';
     }
 
     private void initB() {
