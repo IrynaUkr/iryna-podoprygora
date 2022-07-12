@@ -24,10 +24,10 @@ public class ProductDto {
 
     private String description;
 
-    @Positive(message="price should be positive", groups = {OnCreate.class, OnUpdate.class})
+    @Positive(message = "price should be positive", groups = {OnCreate.class, OnUpdate.class})
     private Double price;
 
-    @PositiveOrZero(message="amount should be positive or zero",groups = {OnCreate.class, OnUpdate.class})
+    @PositiveOrZero(message = "amount should be positive or zero", groups = {OnCreate.class, OnUpdate.class})
     private Double amount;
     private String uom;
 }

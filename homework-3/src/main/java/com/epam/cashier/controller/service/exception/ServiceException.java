@@ -6,12 +6,14 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public abstract class ServiceException extends RuntimeException{
+public abstract class ServiceException extends RuntimeException {
     private ErrorType errorType;
-    public ServiceException(String message){
+
+    public ServiceException(String message) {
         super(message);
     }
-    public ErrorType getErrorType(){
+
+    public ErrorType getErrorType() {
         return ErrorType.FATAL_ERROR_TYPE;
     }
 }
