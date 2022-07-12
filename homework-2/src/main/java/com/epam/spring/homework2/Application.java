@@ -8,9 +8,13 @@ import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(FirstConfig.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(FirstConfig.class);
+        System.out.println("beans names:");
         Arrays.stream(context.getBeanDefinitionNames())
                 .forEach(name -> System.out.println(context.getBean(name)));
-        ((AnnotationConfigApplicationContext) context).close();
+        System.out.println("beans configuration: ");
+        Arrays.stream(context.getBeanDefinitionNames())
+                .forEach(name -> System.out.println(context.getBeanDefinition(name)));
+        context.close();
     }
 }
