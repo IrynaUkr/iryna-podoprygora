@@ -2,15 +2,18 @@ package com.epam.cashier.controller.service.impl;
 
 import com.epam.cashier.controller.dto.UserDto;
 import com.epam.cashier.controller.service.UserService;
+import com.epam.cashier.controller.service.exception.RoleNotFoundException;
 import com.epam.cashier.controller.service.exception.UserAlreadyExistException;
 import com.epam.cashier.controller.service.exception.UserNotFoundException;
 import com.epam.cashier.controller.service.mapper.UserMapper;
+import com.epam.cashier.controller.service.model.Role;
 import com.epam.cashier.controller.service.model.User;
 import com.epam.cashier.controller.service.repository.RoleRepository;
 import com.epam.cashier.controller.service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -38,11 +41,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserDto createUser(UserDto userDto) {
         log.info("createUser");
+        Role role = userDto.getRole();
+        String roleName = role.getRoleName();
         if (userRepository.existsByLogin(userDto.getLogin())) {
             throw new UserAlreadyExistException("User with {} login: is already exist" + userDto.getLogin());
         } else {
+            userDto.setRole(
+                    roleRepository
+                            .findByRoleName(roleName.toLowerCase())
+                            .orElseThrow(RoleNotFoundException::new));
+
             User user = UserMapper.INSTANCE.mapToUser(userDto);
             user = userRepository.save(user);
             log.info("User was created");
@@ -51,6 +62,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserDto updateUser(String login, UserDto userDto) {
         log.info("Started updating user by id");
         User persistedUser = userRepository.findByLogin(login)
@@ -86,11 +98,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUser(String login) {
         log.info("deleteUser with login {}", login);
         User persistedUser = userRepository.findByLogin(login)
                 .orElseThrow(UserNotFoundException::new);
         userRepository.delete(persistedUser);
-        log.info("user with login {} was deleted successfully" + login );
+        log.info("user with login {} was deleted successfully" + login);
     }
 }

@@ -21,6 +21,7 @@ public class User {
     private String phoneNumber;
     private String email;
     private String address;
+    @Enumerated(EnumType.STRING)
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;

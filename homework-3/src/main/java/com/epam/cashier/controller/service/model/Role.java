@@ -20,7 +20,7 @@ public class Role {
     @GeneratedValue
     private int id;
 
-    private String role;
+    private String roleName;
 
     @JsonIgnore
     @OneToMany(mappedBy = "role")
