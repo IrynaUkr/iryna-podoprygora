@@ -5,8 +5,12 @@ import com.epam.cashier.controller.service.model.ErrorType;
 public class ProductNotFoundException extends ServiceException {
     private static final String DEFAULT_MESSAGE = "Product not found";
 
-    public ProductNotFoundException(String message) {
+    public ProductNotFoundException() {
         super(DEFAULT_MESSAGE);
+    }
+
+    public ProductNotFoundException(String message) {
+        super(message);
     }
 
     @Override

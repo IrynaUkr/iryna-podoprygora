@@ -7,17 +7,24 @@ import com.epam.cashier.controller.service.validator.PhoneNumberConstraint;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
+import org.springframework.data.annotation.ReadOnlyProperty;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Null;
+import javax.validation.constraints.*;
 
 @Data
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
+    private int idUser;
+
     @NotBlank(message = "login shouldn't be empty", groups = OnCreate.class)
     private String login;
+  //  @ToString.Exclude
+    @Pattern(
+            regexp = "(?=^.{8,}$)(?=.*\\d)(?=.*[!@#$%^&*]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).{8,32}$",
+            message = "validation user-password")
+    private String password;
 
     @NotBlank(message = "surname shouldn't be empty", groups = OnCreate.class)
     private String surname;
@@ -34,5 +41,6 @@ public class UserDto {
     @NotBlank(message = "address shouldn't be empty", groups = OnCreate.class)
     private String address;
 
-    private Role role;
+    @NotBlank(message = "role shouldn't be empty", groups = OnCreate.class)
+    private String role;
 }

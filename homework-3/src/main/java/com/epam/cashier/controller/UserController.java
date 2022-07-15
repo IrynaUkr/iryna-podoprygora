@@ -44,8 +44,8 @@ public class UserController {
     @ApiOperation("update user by email")
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/user/{email}")
-    public UserDto updateUser(@PathVariable @Validated(OnUpdate.class) String email, @RequestBody UserDto userDto) {
-        return userService.updateUser(email, userDto);
+    public UserDto updateUser(@PathVariable @Validated(OnUpdate.class) int id, @RequestBody UserDto userDto) {
+        return userService.updateUser(id, userDto);
     }
 
     @ApiOperation("get user")

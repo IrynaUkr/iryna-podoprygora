@@ -2,14 +2,14 @@ package com.epam.cashier.controller.service.exception;
 
 import com.epam.cashier.controller.service.model.ErrorType;
 
-public class UserNotFoundException extends ServiceException {
-    private static final String DEFAULT_MESSAGE = "User not found";
+public class UserAlreadyExistException extends ServiceException {
+    private static final String DEFAULT_MESSAGE = "User is already exist";
 
-    public UserNotFoundException() {
+    public UserAlreadyExistException() {
         super(DEFAULT_MESSAGE);
     }
 
-    public UserNotFoundException(String message) {
+    public UserAlreadyExistException(String message) {
         super(message);
     }
 

@@ -2,19 +2,16 @@ package com.epam.cashier.controller.service.repository;
 
 import com.epam.cashier.controller.service.model.Product;
 import com.epam.cashier.controller.service.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface ProductRepository {
-    List<Product> getAllProducts();
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Integer> {
+    @Override
+    Optional<Product> findById(Integer integer);
 
-    Product getProduct(int id);
-
-    Product create(Product product);
-
-    Product updateProduct(int id, Product product);
-
-    void deleteProduct(int id);
-
-    void deleteProductByCode(String code);
+    boolean existsByCode(String code);
 }

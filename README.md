@@ -1,22 +1,14 @@
 # homework 4
 ## Irina Podoprygora
-### Spring_4 Web MVC Homework
-
-
+### Spring_5 Data Homework
 
 Required:
 
-Extend your service functionality by:
-
-adding basic validation to DTO classes
-
-using mapstruct to map DTOs
-
-implementing custom common and unified error handling functionality using Spring MVC components
-
-adding the Spring Boot Actuator to your project and configuring the ‘/info’ endpoint of it.
-
-extending your service RESTful endpoints by Swagger Documentation
-
-create custom validation annotations using ConstraintValidator 
-
+Get well acquainted with all topics mentioned in the lecture
+(especially with JPA and Spring Data JPA)
+Integrate your application with any relational database.
+You are free of choice regarding the relational database management system to be used.
+integrate using Spring Data JPA (configure connection details, implement JPA repositories, etc.)
+add JPA entity mapping including mappings between entities (@OneToOne, @ManyToOne, etc.)
+make sure to use all/any of listed annotation: @Query, @NamedQuery, and @NamedNativeQuery.
+make sure to use ‘pageable’ and ‘sortable’ reads from the database.
