@@ -41,24 +41,24 @@ public class UserController {
         return userService.createUser(userDto);
     }
 
-    @ApiOperation("update user by email")
+    @ApiOperation("update user by login")
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping(value = "/user/{email}")
-    public UserDto updateUser(@PathVariable @Validated(OnUpdate.class) int id, @RequestBody UserDto userDto) {
-        return userService.updateUser(id, userDto);
+    @PatchMapping (value = "/user/{login}")
+    public UserDto updateUser(@PathVariable @Validated(OnUpdate.class) String login, @RequestBody UserDto userDto) {
+        return userService.updateUser(login, userDto);
     }
 
     @ApiOperation("get user")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/user/{email}")
-    public UserDto getUser(@PathVariable String email) {
-        return userService.getUser(email);
+    @GetMapping("/user/{login}")
+    public UserDto getUser(@PathVariable String login) {
+        return userService.getUser(login);
     }
 
     @ApiOperation("delete user")
-    @DeleteMapping("/user/{email}")
-    public ResponseEntity<Void> deleteUser(@PathVariable String email) {
-        userService.deleteUser(email);
+    @DeleteMapping("/user/{login}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String login) {
+        userService.deleteUser(login);
         return ResponseEntity.noContent().build();
     }
 }

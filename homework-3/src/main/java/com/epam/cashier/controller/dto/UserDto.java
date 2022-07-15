@@ -5,14 +5,13 @@ import com.epam.cashier.controller.dto.group.OnUpdate;
 import com.epam.cashier.controller.service.model.Role;
 import com.epam.cashier.controller.service.validator.PhoneNumberConstraint;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
-import org.springframework.data.annotation.ReadOnlyProperty;
+import lombok.*;
 
 import javax.validation.constraints.*;
 
 @Data
+@Getter
+@Setter
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
@@ -20,7 +19,7 @@ public class UserDto {
 
     @NotBlank(message = "login shouldn't be empty", groups = OnCreate.class)
     private String login;
-  //  @ToString.Exclude
+    @ToString.Exclude
     @Pattern(
             regexp = "(?=^.{8,}$)(?=.*\\d)(?=.*[!@#$%^&*]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).{8,32}$",
             message = "validation user-password")
@@ -41,6 +40,6 @@ public class UserDto {
     @NotBlank(message = "address shouldn't be empty", groups = OnCreate.class)
     private String address;
 
-    @NotBlank(message = "role shouldn't be empty", groups = OnCreate.class)
-    private String role;
+  //  @NotBlank(message = "role shouldn't be empty", groups = OnCreate.class)
+    private Role role;
 }
