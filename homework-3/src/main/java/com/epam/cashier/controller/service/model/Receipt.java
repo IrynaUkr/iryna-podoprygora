@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,7 +16,7 @@ import java.sql.Date;
 public class Receipt {
     @Id
     @GeneratedValue
-    private Integer id;
+    private Integer receiptId;
     @Column(unique = true)
     private String number;
     private Double sum;
@@ -27,4 +28,6 @@ public class Receipt {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private OperationStatus status;
     private OperationType operationType;
+    @OneToMany(mappedBy = "receipt")
+    List<ReceiptProducts> receiptProducts;
 }

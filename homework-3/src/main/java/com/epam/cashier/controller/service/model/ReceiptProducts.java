@@ -1,15 +1,26 @@
 package com.epam.cashier.controller.service.model;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
+
+@Entity
 @Builder
-public class ReceiptProducts {
-    private Integer productId;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class ReceiptProducts  {
+    @Id
+    private int id;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+    @ManyToOne
+    @JoinColumn(name = "receipt_id")
+    private Receipt receipt;
     private double amount;
     private double price;
-    private String name;
-    private String code;
-    private String uom;
 }

@@ -5,10 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,4 +23,6 @@ public class Product {
     private String description;
     private Double price;
     private Double amount;
+    @OneToMany(mappedBy = "product")
+    List<ReceiptProducts> receiptProducts;
 }
