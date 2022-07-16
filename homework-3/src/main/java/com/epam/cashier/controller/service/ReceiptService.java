@@ -17,5 +17,6 @@ public interface ReceiptService {
 
     Receipt mupPresentReceiptFieldsDtoFields(Receipt receipt, ProductDto productDto);
 
-    void deleteProduct(String number);
+    void deleteReceipt(String number);
+
 }

@@ -75,7 +75,7 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     @Transactional
-    public void deleteProduct(String number) {
+    public void deleteReceipt(String number) {
         log.info("delete product by number {}", number);
         Receipt persistedReceipt = receiptRepository.findByNumber(number)
                 .orElseThrow(ReceiptAlreadyExistException::new);

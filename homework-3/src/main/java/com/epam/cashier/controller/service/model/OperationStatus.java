@@ -25,7 +25,7 @@ public class OperationStatus {
     String statusName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "operationStatus")
+    @OneToMany(mappedBy = "status")
     private Set<Receipt> receipts;
 
     @Override
