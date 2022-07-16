@@ -83,6 +83,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public void deleteProduct(String code) {
         log.info("delete product by code {}", code);
         Product persistedProduct = productRepository.findByCode(code)

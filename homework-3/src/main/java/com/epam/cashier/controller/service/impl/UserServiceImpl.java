@@ -2,6 +2,7 @@ package com.epam.cashier.controller.service.impl;
 
 import com.epam.cashier.controller.dto.UserDto;
 import com.epam.cashier.controller.service.UserService;
+import com.epam.cashier.controller.service.exception.ReceiptNotFoundException;
 import com.epam.cashier.controller.service.exception.RoleNotFoundException;
 import com.epam.cashier.controller.service.exception.UserAlreadyExistException;
 import com.epam.cashier.controller.service.exception.UserNotFoundException;
@@ -27,9 +28,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUser(String login) {
-        log.info("Finding user by email");
-        User user = userRepository.findByLogin(login).orElseThrow(UserNotFoundException::new);
-        log.info("User with {} email was found: " + login);
+        log.info("Finding user by login");
+        User user = userRepository.findByLogin(login)
+                .orElseThrow(ReceiptNotFoundException::new);
+        log.info("User with  login {} was found: " + login);
         return UserMapper.INSTANCE.mapToUserDto(user);
     }
 
@@ -43,7 +45,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDto createUser(UserDto userDto) {
-        log.info("createUser");
+        log.info("creating User");
         Role role = userDto.getRole();
         String roleName = role.getRoleName();
         if (userRepository.existsByLogin(userDto.getLogin())) {
@@ -52,7 +54,8 @@ public class UserServiceImpl implements UserService {
             userDto.setRole(
                     roleRepository
                             .findByRoleName(roleName.toLowerCase())
-                            .orElseThrow(RoleNotFoundException::new));
+                            .orElseThrow(RoleNotFoundException::new)
+            );
 
             User user = UserMapper.INSTANCE.mapToUser(userDto);
             user = userRepository.save(user);
