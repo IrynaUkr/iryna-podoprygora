@@ -44,10 +44,10 @@ public class ProductController {
 
     @ApiOperation("update product")
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping(value = "/product/{id}")
-    public ProductDto updateProduct(@PathVariable int id,
+    @PatchMapping(value = "/product/{code}")
+    public ProductDto updateProduct(@PathVariable String code,
                                     @RequestBody @Validated(OnUpdate.class) ProductDto productDto) {
-        return productService.updateProduct(id, productDto);
+        return productService.updateProduct(code, productDto);
     }
 
     @ApiOperation("get product by id")
@@ -57,10 +57,10 @@ public class ProductController {
         return productService.getProduct(id);
     }
 
-    @ApiOperation("delete product by id")
-    @DeleteMapping("/product/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
-        productService.deleteProduct(id);
+    @ApiOperation("delete product by code")
+    @DeleteMapping("/product/{code}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String code) {
+        productService.deleteProduct(code);
         return ResponseEntity.noContent().build();
     }
 }

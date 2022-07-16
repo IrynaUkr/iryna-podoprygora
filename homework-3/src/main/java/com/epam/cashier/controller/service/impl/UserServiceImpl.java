@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDto updateUser(String login, UserDto userDto) {
-        log.info("Started updating user by id");
+        log.info("Started updating user by login");
         User persistedUser = userRepository.findByLogin(login)
                 .orElseThrow(UserNotFoundException::new);
         User updatedUser = mapPresentUserFieldsUserDtoFields(persistedUser, userDto);
@@ -73,7 +73,8 @@ public class UserServiceImpl implements UserService {
         return UserMapper.INSTANCE.mapToUserDto(updatedUser);
     }
 
-    private User mapPresentUserFieldsUserDtoFields(User user, UserDto userDto) {
+    @Override
+    public User mapPresentUserFieldsUserDtoFields(User user, UserDto userDto) {
         String email = userDto.getEmail();
         if (Objects.nonNull(email)) {
             user.setEmail(email);

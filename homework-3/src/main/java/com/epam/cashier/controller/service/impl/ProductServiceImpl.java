@@ -10,8 +10,10 @@ import com.epam.cashier.controller.service.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -35,11 +37,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ProductDto createProduct(ProductDto productDTO) {
         log.info("create product with code" + productDTO.getCode());
-        if(productRepository.existsByCode(productDTO.getCode())){
+        if (productRepository.existsByCode(productDTO.getCode())) {
             throw new ProductAlreadyExistException();
-        }else{
+        } else {
             Product product = ProductMapper.INSTANCE.mapToProduct(productDTO);
             productRepository.save(product);
             log.info("Product was created");
@@ -48,16 +51,43 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto updateProduct(int id, ProductDto productDTO) {
-        log.info("update product with id {}", id);
-        Product pr = ProductMapper.INSTANCE.mapToProduct(productDTO);
-        pr.setProductId(id);
-        return ProductMapper.INSTANCE.mapToProductDto(pr);
+    @Transactional
+    public ProductDto updateProduct(String code, ProductDto productDTO) {
+        log.info("update product with id {}", code);
+        Product persistedProduct = productRepository.findByCode(code)
+                .orElseThrow(ProductNotFoundException::new);
+        Product updatedProduct = mapPresentProductFieldsProductDtoFields(persistedProduct, productDTO);
+        productRepository.save(updatedProduct);
+        return ProductMapper.INSTANCE.mapToProductDto(updatedProduct);
     }
 
     @Override
-    public void deleteProduct(int id) {
-        log.info("deleteUser with email {}", id);
-        productRepository.deleteById(id);
+    public Product mapPresentProductFieldsProductDtoFields(Product product, ProductDto productDto) {
+        String name = productDto.getName();
+        if (Objects.nonNull(name)) {
+            product.setName(name);
+        }
+        String description = productDto.getDescription();
+        if (Objects.nonNull(description)) {
+            product.setDescription(description);
+        }
+        Double price = productDto.getPrice();
+        if (Objects.nonNull(price)) {
+            product.setPrice(price);
+        }
+        Double amount = product.getAmount();
+        if (Objects.nonNull(amount)) {
+            product.setAmount(amount);
+        }
+        return product;
+    }
+
+    @Override
+    public void deleteProduct(String code) {
+        log.info("delete product by code {}", code);
+        Product persistedProduct = productRepository.findByCode(code)
+                .orElseThrow(ProductNotFoundException::new);
+        productRepository.delete(persistedProduct);
+        log.info("product with code {} was successfully deleted", code);
     }
 }

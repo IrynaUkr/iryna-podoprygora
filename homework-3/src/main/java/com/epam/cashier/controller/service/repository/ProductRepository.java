@@ -10,8 +10,8 @@ import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-    @Override
-    Optional<Product> findById(Integer integer);
+
+    Optional<Product> findByCode(String code);
 
     boolean existsByCode(String code);
 }
