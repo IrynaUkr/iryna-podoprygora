@@ -3,8 +3,6 @@ package com.epam.cashier.controller.service.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Builder
@@ -14,6 +12,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class ReceiptProducts  {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
     @JoinColumn(name = "product_id")

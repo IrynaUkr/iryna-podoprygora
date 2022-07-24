@@ -9,5 +9,8 @@ import java.util.Optional;
 @Repository
 public interface ReceiptRepository extends JpaRepository<Receipt, Integer> {
     Optional<Receipt> findByNumber(String number);
+
+    Optional<Receipt> findByReceiptId(int id);
+
     boolean existsByNumber(String number);
 }

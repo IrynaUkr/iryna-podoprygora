@@ -1,10 +1,11 @@
 package com.epam.cashier.controller;
 
-import com.epam.cashier.controller.dto.ProductDto;
 import com.epam.cashier.controller.dto.ReceiptDto;
+import com.epam.cashier.controller.dto.ReceiptProductDto;
 import com.epam.cashier.controller.dto.group.OnCreate;
 import com.epam.cashier.controller.dto.group.OnUpdate;
 import com.epam.cashier.controller.service.ReceiptService;
+import com.epam.cashier.controller.service.model.ReceiptProducts;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -38,17 +39,10 @@ public class ReceiptController {
     @ApiOperation("create receipt")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/receipt")
-    public ReceiptDto createReceipt(@RequestBody @Validated(OnCreate.class) ReceiptDto receiptDto) {
-        return receiptService.createReceipt(receiptDto);
+    public ReceiptDto createNewReceipt(@RequestBody List<ReceiptProductDto> receiptProductDtos) {
+        return receiptService.createReceipt(receiptProductDtos);
     }
 
-    @ApiOperation("update receipt")
-    @ResponseStatus(HttpStatus.OK)
-    @PatchMapping(value = "/receipt/{number}")
-    public ReceiptDto updateReceipt(@PathVariable String number,
-                                    @RequestBody @Validated(OnUpdate.class) ReceiptDto receiptDto) {
-        return receiptService.updateReceipt(number, receiptDto);
-    }
 
     @ApiOperation("get receipt by number")
     @GetMapping(value = "/receipt/{number}")

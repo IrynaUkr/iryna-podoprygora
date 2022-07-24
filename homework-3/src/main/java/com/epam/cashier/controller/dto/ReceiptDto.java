@@ -20,8 +20,6 @@ public class ReceiptDto {
     private Integer receiptId;
     @NotBlank(message = "receipt number shouldn't be empty", groups = OnCreate.class)
     private String number;
-    private Double sum;
-    private Double amount;
     @FutureOrPresent
     private Date date;
     private Integer idUser;

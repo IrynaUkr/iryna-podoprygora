@@ -19,8 +19,6 @@ public class Receipt {
     private Integer receiptId;
     @Column(unique = true)
     private String number;
-    private Double sum;
-    private Double amount;
     private Date date;
     private Integer idUser;
     @Enumerated(EnumType.STRING)
@@ -28,6 +26,6 @@ public class Receipt {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private OperationStatus status;
     private OperationType operationType;
-    @OneToMany(mappedBy = "receipt")
+    @OneToMany(mappedBy = "receipt", cascade = CascadeType.ALL,orphanRemoval = true)
     List<ReceiptProducts> receiptProducts;
 }
