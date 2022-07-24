@@ -26,6 +26,7 @@ public class Role {
     @OneToMany(mappedBy = "role")
     @ToString.Exclude
     private Set<User> users;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

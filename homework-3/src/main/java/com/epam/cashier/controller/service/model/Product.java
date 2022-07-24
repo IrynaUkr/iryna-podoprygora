@@ -25,4 +25,11 @@ public class Product {
     private Double amount;
     @OneToMany(mappedBy = "product")
     List<ReceiptProducts> receiptProducts;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                '}';
+    }
 }

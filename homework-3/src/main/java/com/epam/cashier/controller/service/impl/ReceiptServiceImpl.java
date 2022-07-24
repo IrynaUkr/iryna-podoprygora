@@ -6,19 +6,17 @@ import com.epam.cashier.controller.dto.ReceiptProductDto;
 import com.epam.cashier.controller.service.ReceiptService;
 import com.epam.cashier.controller.service.exception.*;
 import com.epam.cashier.controller.service.mapper.ReceiptMapper;
-import com.epam.cashier.controller.service.mapper.ReceiptProductMapper;
 import com.epam.cashier.controller.service.model.*;
 import com.epam.cashier.controller.service.repository.OperationStatusRepository;
 import com.epam.cashier.controller.service.repository.ProductRepository;
-import com.epam.cashier.controller.service.repository.ReceiptProductRepository;
 import com.epam.cashier.controller.service.repository.ReceiptRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -26,16 +24,18 @@ import java.util.Optional;
 public class ReceiptServiceImpl implements ReceiptService {
     private final ReceiptRepository receiptRepository;
     private final OperationStatusRepository statusRepository;
-    private final ReceiptProductRepository receiptProductRepository;
-    private  final ProductRepository   productRepository;
+    private final ProductRepository productRepository;
 
     @Override
-    public ReceiptDto getReceipt(String number) {
-        log.info("Finding Receipt by number ");
-        Receipt receipt = receiptRepository.findByNumber(number)
-                .orElseThrow(UserNotFoundException::new);
-        log.info("receipt with number {} was found", number);
-        return ReceiptMapper.INSTANCE.mapToReceiptDto(receipt);
+    public ReceiptDto getReceipt(int id) {
+        log.info("Finding Receipt by id ");
+        Receipt receipt = receiptRepository.findByReceiptId(id)
+                .orElseThrow(ReceiptNotFoundException::new);
+        log.info("receipt with id {} was found", id);
+        ReceiptDto receiptDto = new ReceiptDto();
+        receiptDto.setReceiptId(id);
+        receiptDto.setStatus(receipt.getStatus());
+        return receiptDto;
     }
 
     @Override
@@ -46,6 +46,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     }
 
     @Override
+    @Transactional
     public ReceiptDto createReceipt(List<ReceiptProductDto> receiptProductsDto) {
         log.info("creating Receipt");
         Receipt receipt = new Receipt();
@@ -56,18 +57,27 @@ public class ReceiptServiceImpl implements ReceiptService {
         Receipt savedReceipt = receiptRepository.save(receipt);
         log.info("receipt number {} was created", savedReceipt.getNumber());
         log.info("add list of products with amount and price to receipt:");
-        List<ReceiptProducts> receiptProducts = ReceiptProductMapper.INSTANCE.mapToReceiptProduct(receiptProductsDto);
-        for (int i = 0; i < receiptProducts.size(); i++) {
-            ReceiptProducts rp = receiptProducts.get(i);
+        ReceiptDto receiptDto = addProductDtoOrderList(receiptProductsDto);
+        receiptDto.setReceiptId(savedReceipt.getReceiptId());
+        receiptDto.setStatus(status);
+        return receiptDto;
+    }
+    public ReceiptDto addProductDtoOrderList(List<ReceiptProductDto> receiptProductDtos) {
+        ReceiptDto receiptDto = new ReceiptDto();
+        List<ProductOrder> productOrders = new ArrayList<>();
+        for (ReceiptProductDto rp : receiptProductDtos) {
             Integer productId = rp.getProduct().getProductId();
-            Product product = productRepository.findByProductId(productId).orElseThrow(ProductNotFoundException::new);
-            rp.setProduct(product);
-            rp.setReceipt(savedReceipt);
-            receiptProductRepository.save(rp);
+            Product product = productRepository.findByProductId(productId)
+                    .orElseThrow(ProductNotFoundException::new);
+            ProductOrder po = new ProductOrder();
+            po.setIdProduct(productId);
+            po.setAmount(rp.getAmount());
+            po.setPrice(rp.getPrice());
+            po.setNameProduct(product.getName());
+            productOrders.add(po);
         }
-        ReceiptProductMapper.INSTANCE.mapToReceiptProductDtos(receiptProducts);
-        log.info("list of products with amount and price was added");
-        return ReceiptMapper.INSTANCE.mapToReceiptDto(savedReceipt);
+        receiptDto.setProductOrders(productOrders);
+        return receiptDto;
     }
 
     @Override

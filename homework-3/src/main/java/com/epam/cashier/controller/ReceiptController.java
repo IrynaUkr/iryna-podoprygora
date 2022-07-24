@@ -2,10 +2,7 @@ package com.epam.cashier.controller;
 
 import com.epam.cashier.controller.dto.ReceiptDto;
 import com.epam.cashier.controller.dto.ReceiptProductDto;
-import com.epam.cashier.controller.dto.group.OnCreate;
-import com.epam.cashier.controller.dto.group.OnUpdate;
 import com.epam.cashier.controller.service.ReceiptService;
-import com.epam.cashier.controller.service.model.ReceiptProducts;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -13,7 +10,6 @@ import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,10 +40,10 @@ public class ReceiptController {
     }
 
 
-    @ApiOperation("get receipt by number")
-    @GetMapping(value = "/receipt/{number}")
-    public ReceiptDto getReceipt(@PathVariable String number) {
-        return receiptService.getReceipt(number);
+    @ApiOperation("get receipt by id")
+    @GetMapping(value = "/receipt/{id}")
+    public ReceiptDto getReceipt(@PathVariable int id) {
+        return receiptService.getReceipt(id);
     }
 
     @ApiOperation("delete receipt by number")

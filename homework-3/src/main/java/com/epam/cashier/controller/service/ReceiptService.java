@@ -9,7 +9,7 @@ import com.epam.cashier.controller.service.model.ReceiptProducts;
 import java.util.List;
 
 public interface ReceiptService {
-    ReceiptDto getReceipt(String number);
+    ReceiptDto getReceipt(int id);
 
     List<ReceiptDto> listReceipt();
 

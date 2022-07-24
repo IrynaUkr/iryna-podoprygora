@@ -26,6 +26,13 @@ public class Receipt {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private OperationStatus status;
     private OperationType operationType;
-    @OneToMany(mappedBy = "receipt", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "receipt", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ReceiptProducts> receiptProducts;
+
+    @Override
+    public String toString() {
+        return "Receipt{" +
+                "receiptId=" + receiptId +
+                '}';
+    }
 }
