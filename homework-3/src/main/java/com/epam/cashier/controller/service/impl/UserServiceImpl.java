@@ -13,9 +13,14 @@ import com.epam.cashier.controller.service.repository.RoleRepository;
 import com.epam.cashier.controller.service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,8 +43,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> listUsers() {
         log.info("Finding all users");
-        List<User> allUsers = userRepository.findAll();
-        return UserMapper.INSTANCE.mapUserDtos(allUsers);
+        List<User> users;
+        Pageable paging = PageRequest.of(0, 3, Sort.by("login"));
+        Page<User> allUsers = userRepository.findAll(paging);
+        if (allUsers.hasContent()) {
+            users = allUsers.getContent();
+        } else {
+            users = new ArrayList<>();
+        }
+        return UserMapper.INSTANCE.mapUserDtos(users);
     }
 
     @Override

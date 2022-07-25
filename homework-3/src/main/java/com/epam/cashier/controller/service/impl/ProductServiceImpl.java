@@ -9,9 +9,14 @@ import com.epam.cashier.controller.service.model.Product;
 import com.epam.cashier.controller.service.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,8 +37,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDto> listProduct() {
         log.info("Find list of Product");
-        List<Product> allProducts = productRepository.findAll();
-        return ProductMapper.INSTANCE.mapToProductDtos(allProducts);
+        List <Product> products = productRepository.findAll();
+        return ProductMapper.INSTANCE.mapToProductDtos(products);
     }
 
     @Override

@@ -34,7 +34,6 @@ public class ProductController {
         return productService.listProduct();
     }
 
-
     @ApiOperation("create product")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/product")

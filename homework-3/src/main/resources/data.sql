@@ -32,3 +32,16 @@ INSERT INTO `cash_register`.`product` (`product_id`, `amount`, `code`, `name`, `
 VALUES (1, 100.0, 'a123', 'apple', 24.0);
 INSERT INTO `cash_register`.`product` (`product_id`, `amount`, `code`, `name`, `price`)
 VALUES (2, 200.0, 'b234', 'apricot', 34.0);
+
+-- -----------------------------------------------------
+-- Data for table `cash_register`.`user`
+-- -----------------------------------------------------
+
+INSERT INTO `cash_register`.`user` (`id_user`, `login`, `surname`, `role_id`)
+VALUES (1, 'mike', 'jonson', 1);
+INSERT INTO `cash_register`.`user` (`id_user`, `login`, `surname`, `role_id`)
+VALUES (2, 'jack', 'simpson', 2);
+INSERT INTO `cash_register`.`user` (`id_user`, `login`, `surname`, `role_id`)
+VALUES (3, 'karen', 'peterson', 3);
+INSERT INTO `cash_register`.`user` (`id_user`, `login`, `surname`, `role_id`)
+VALUES (4, 'adam', 'amundsen', 4);
