@@ -9,7 +9,10 @@ public interface UserService {
     UserDto getUser(String email);
 
     List<UserDto> listUsers();
+
     List<UserDto> listUsersCashiers();
+
+    List<UserDto> listUsersMerchandisers();
 
     UserDto createUser(UserDto userDto);
 

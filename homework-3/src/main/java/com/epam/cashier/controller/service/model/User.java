@@ -11,6 +11,8 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedQuery(name = "User.findAllMerchandisers",
+        query = "SELECT u FROM User u WHERE u.role = '4' ")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

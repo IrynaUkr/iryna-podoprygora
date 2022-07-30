@@ -40,6 +40,13 @@ public class UserController {
         return userService.listUsersCashiers();
     }
 
+    @ApiOperation("get all usersCashiers")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/user/merch")
+    public List<UserDto> getAllUsersMerchandisers() {
+        return userService.listUsersMerchandisers();
+    }
+
     @ApiOperation("create user")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/user")
