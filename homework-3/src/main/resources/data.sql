@@ -45,3 +45,7 @@ INSERT INTO `cash_register`.`user` (`id_user`, `login`, `surname`, `role_id`)
 VALUES (3, 'karen', 'peterson', 3);
 INSERT INTO `cash_register`.`user` (`id_user`, `login`, `surname`, `role_id`)
 VALUES (4, 'adam', 'amundsen', 4);
+INSERT INTO `cash_register`.`user` (`id_user`, `login`, `surname`, `role_id`)
+VALUES (5, 'lily', 'smith', 2);
+INSERT INTO `cash_register`.`user` (`id_user`, `login`, `surname`, `role_id`)
+VALUES (6, 'jane', 'cake', 2);

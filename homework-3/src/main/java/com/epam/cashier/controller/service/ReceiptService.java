@@ -4,7 +4,6 @@ import com.epam.cashier.controller.dto.ProductDto;
 import com.epam.cashier.controller.dto.ReceiptDto;
 import com.epam.cashier.controller.dto.ReceiptProductDto;
 import com.epam.cashier.controller.service.model.Receipt;
-import com.epam.cashier.controller.service.model.ReceiptProducts;
 
 import java.util.List;
 

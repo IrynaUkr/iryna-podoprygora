@@ -55,6 +55,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDto> listUsersCashiers() {
+        log.info("Finding all cashiers");
+        List<User> users = userRepository.findAllCashierUsers();
+        return UserMapper.INSTANCE.mapUserDtos(users);
+    }
+
+    @Override
     @Transactional
     public UserDto createUser(UserDto userDto) {
         log.info("creating User");

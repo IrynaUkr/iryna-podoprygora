@@ -33,6 +33,12 @@ public class UserController {
     public List<UserDto> getAllUsers() {
         return userService.listUsers();
     }
+    @ApiOperation("get all usersCashiers")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/user/cashier")
+    public List<UserDto> getAllUsersCashiers() {
+        return userService.listUsersCashiers();
+    }
 
     @ApiOperation("create user")
     @ResponseStatus(HttpStatus.CREATED)
