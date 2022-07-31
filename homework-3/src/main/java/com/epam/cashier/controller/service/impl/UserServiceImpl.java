@@ -2,7 +2,6 @@ package com.epam.cashier.controller.service.impl;
 
 import com.epam.cashier.controller.dto.UserDto;
 import com.epam.cashier.controller.service.UserService;
-import com.epam.cashier.controller.service.exception.ReceiptNotFoundException;
 import com.epam.cashier.controller.service.exception.RoleNotFoundException;
 import com.epam.cashier.controller.service.exception.UserAlreadyExistException;
 import com.epam.cashier.controller.service.exception.UserNotFoundException;
@@ -35,7 +34,7 @@ public class UserServiceImpl implements UserService {
     public UserDto getUser(String login) {
         log.info("Finding user by login");
         User user = userRepository.findByLogin(login)
-                .orElseThrow(ReceiptNotFoundException::new);
+                .orElseThrow(UserNotFoundException::new);
         log.info("User with  login {} was found: " + login);
         return UserMapper.INSTANCE.mapToUserDto(user);
     }
@@ -51,6 +50,7 @@ public class UserServiceImpl implements UserService {
         } else {
             users = new ArrayList<>();
         }
+        log.info("All saved users were found");
         return UserMapper.INSTANCE.mapUserDtos(users);
     }
 
@@ -58,6 +58,7 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> listUsersCashiers() {
         log.info("Finding all cashiers");
         List<User> users = userRepository.findAllCashierUsers();
+        log.info("Users with role cashier were found");
         return UserMapper.INSTANCE.mapUserDtos(users);
     }
 
@@ -65,6 +66,7 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> listUsersMerchandisers() {
         log.info("Finding all merchandisers");
         List<User> users = userRepository.findAllMerchandisers();
+        log.info("Users were found");
         return UserMapper.INSTANCE.mapUserDtos(users);
     }
 
