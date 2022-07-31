@@ -22,11 +22,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
-
     @InjectMocks
     private UserServiceImpl userService;
     @Mock
@@ -97,5 +96,22 @@ class UserServiceImplTest {
         when(userRepository.findByLogin(LOGIN)).thenReturn(Optional.empty());
 
         assertThrows(UserNotFoundException.class, () -> userService.updateUser(LOGIN, userDto));
+    }
+
+    @Test
+    public void deleteUserTest() {
+        User testUser = TestDataUtil.createUserCashier();
+        when(userRepository.findByLogin(LOGIN)).thenReturn(Optional.of(testUser));
+
+        userService.deleteUser(testUser.getLogin());
+        verify(userRepository, times(1)).delete(testUser);
+    }
+
+    @Test
+    public void deleteUserUserNotFoundExceptionTest() {
+        User testUser = TestDataUtil.createUserCashier();
+        when(userRepository.findByLogin(testUser.getLogin())).thenReturn(Optional.empty());
+
+        assertThrows(UserNotFoundException.class, () -> userService.deleteUser(testUser.getLogin()));
     }
 }
