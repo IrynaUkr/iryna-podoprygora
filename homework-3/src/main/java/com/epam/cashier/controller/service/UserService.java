@@ -6,7 +6,7 @@ import com.epam.cashier.controller.service.model.User;
 import java.util.List;
 
 public interface UserService {
-    UserDto getUser(String email);
+    UserDto getUser(String login);
 
     List<UserDto> listUsers();
 
