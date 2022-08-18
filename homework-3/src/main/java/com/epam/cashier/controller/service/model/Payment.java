@@ -11,6 +11,7 @@ public class Payment {
     private Integer id;
     private Double value;
     private Date date;
+    private String number;
     private Integer idUser;
     private OperationStatus status;
     private OperationType type;
