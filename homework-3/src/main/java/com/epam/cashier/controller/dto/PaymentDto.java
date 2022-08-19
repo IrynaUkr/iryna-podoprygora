@@ -3,7 +3,6 @@ package com.epam.cashier.controller.dto;
 import com.epam.cashier.controller.dto.group.OnCreate;
 import com.epam.cashier.controller.dto.group.OnUpdate;
 import com.epam.cashier.controller.service.model.OperationStatus;
-import com.epam.cashier.controller.service.model.OperationType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +10,6 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
-import javax.validation.constraints.PositiveOrZero;
 import java.sql.Date;
 
 @Data
@@ -27,7 +25,5 @@ public class PaymentDto {
     private Date date;
     private Integer idUser;
     private OperationStatus status;
-    @NotBlank(message = "operation type should be chosen", groups = {OnCreate.class, OnUpdate.class})
-    private OperationType type;
     private String description;
 }

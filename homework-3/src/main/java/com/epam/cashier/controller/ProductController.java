@@ -57,8 +57,9 @@ public class ProductController {
     }
 
     @ApiOperation("delete product by code")
+    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/product/{code}")
-    public ResponseEntity<Void> deleteUser(@PathVariable String code) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable String code) {
         productService.deleteProduct(code);
         return ResponseEntity.noContent().build();
     }
