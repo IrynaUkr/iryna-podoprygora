@@ -48,7 +48,8 @@ class UserServiceImplTest {
     @Test
     void getUserUserNotFoundTest() {
         when(userRepository.findByLogin(LOGIN)).thenReturn(Optional.empty());
-        assertThrows(UserNotFoundException.class, () -> userService.getUser(LOGIN));
+        assertThrows(UserNotFoundException.class,
+                () -> userService.getUser(LOGIN));
     }
 
     @Test
@@ -63,8 +64,8 @@ class UserServiceImplTest {
         UserDto userDto = userService.createUser(testUserDto);
 
         assertThat(userDto, allOf(
-                hasProperty("login", equalTo(testUserDto.getLogin())),
-                hasProperty("surname", equalTo(testUserDto.getSurname()))
+                hasProperty("login", equalTo(userDto.getLogin())),
+                hasProperty("surname", equalTo(userDto.getSurname()))
         ));
     }
 
@@ -82,11 +83,11 @@ class UserServiceImplTest {
         when(userRepository.findByLogin(LOGIN)).thenReturn(Optional.of(testUser));
         when(userRepository.save(any())).thenReturn(testUser);
 
-        userService.updateUser(testUser.getLogin(), testUserDto);
+        UserDto userDto = userService.updateUser(testUser.getLogin(), testUserDto);
 
         assertThat(testUserDto, allOf(
-                hasProperty("login", equalTo(testUserDto.getLogin())),
-                hasProperty("surname", equalTo(testUserDto.getSurname()))
+                hasProperty("login", equalTo(userDto.getLogin())),
+                hasProperty("surname", equalTo(userDto.getSurname()))
         ));
     }
 

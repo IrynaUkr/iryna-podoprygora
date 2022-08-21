@@ -50,11 +50,11 @@ public class PaymentController {
         return paymentService.updatePayment(number, paymentDto);
     }
 
-    @ApiOperation("get payment by id")
+    @ApiOperation("get payment by number")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/payment/{id}")
-    public PaymentDto getPayment(@PathVariable int id){
-        return paymentService.getPayment(id);
+    @GetMapping("/payment/{number}")
+    public PaymentDto getPayment(@PathVariable String number){
+        return paymentService.getPayment(number);
     }
 
     @ApiOperation("delete payment by number")

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PaymentService {
 
-    PaymentDto getPayment(int id);
+    PaymentDto getPayment(String number);
 
     List<PaymentDto> listPayment();
 

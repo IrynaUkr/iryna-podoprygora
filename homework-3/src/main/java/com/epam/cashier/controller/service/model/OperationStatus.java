@@ -22,11 +22,16 @@ public class OperationStatus {
     @Id
     @GeneratedValue
     private int id;
+
     String statusName;
 
     @JsonIgnore
     @OneToMany(mappedBy = "status")
     private Set<Receipt> receipts;
+    @JsonIgnore
+    @OneToMany(mappedBy = "status")
+    @ToString.Exclude
+    private Set<Payment> payments;
 
     @Override
     public int hashCode() {

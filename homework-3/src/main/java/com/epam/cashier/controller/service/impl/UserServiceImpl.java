@@ -99,9 +99,9 @@ public class UserServiceImpl implements UserService {
         User persistedUser = userRepository.findByLogin(login)
                 .orElseThrow(UserNotFoundException::new);
         User updatedUser = mapPresentUserFieldsUserDtoFields(persistedUser, userDto);
-        userRepository.save(updatedUser);
+        User save = userRepository.save(updatedUser);
         log.info("user was updated");
-        return UserMapper.INSTANCE.mapToUserDto(updatedUser);
+        return UserMapper.INSTANCE.mapToUserDto(save);
     }
 
     @Override
