@@ -6,7 +6,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import com.epam.cashier.controller.dto.PaymentDto;
 import com.epam.cashier.controller.service.exception.PaymentAlreadyExistException;
@@ -86,8 +86,37 @@ class PaymentServiceImplTest {
         when(paymentRepository.save(any())).thenReturn(testPayment);
 
         PaymentDto paymentDto = paymentService.updatePayment(PAYMENT_NUMBER, testPaymentDto);
-        assertThat(paymentDto.getDescription(),equals(testPaymentDto.getDescription()));
+        assertThat(testPaymentDto.getDescription(),equalTo(paymentDto.getDescription()));
+        assertThat(testPaymentDto.getValue(),equalTo(paymentDto.getValue()));
+        assertThat(testPaymentDto.getStatus(),equalTo(paymentDto.getStatus()));
+    }
 
+    @Test
+    void updatePaymentNotFoundExceptionTest(){
+        PaymentDto testPaymentDto = createPaymentDto();
+        when(paymentRepository.findByNumber(PAYMENT_NUMBER)).thenReturn(Optional.empty());
+
+       assertThrows(PaymentNotFoundException.class,
+               ()-> paymentService.updatePayment(PAYMENT_NUMBER,testPaymentDto));
+
+    }
+
+    @Test
+    void deletePaymentTest(){
+        Payment testPayment = createPayment();
+        when(paymentRepository.findByNumber(PAYMENT_NUMBER)).thenReturn(Optional.of(testPayment));
+
+        paymentService.deletePayment(PAYMENT_NUMBER);
+
+        verify(paymentRepository,times(1)).delete(testPayment);
+    }
+
+    @Test
+    void deletePaymentNotFoundExceptionTest(){
+        when(paymentRepository.findByNumber(PAYMENT_NUMBER)).thenReturn(Optional.empty());
+
+        assertThrows(PaymentNotFoundException.class,
+                ()-> paymentService.deletePayment(PAYMENT_NUMBER));
     }
 
 
