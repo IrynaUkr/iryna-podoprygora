@@ -14,13 +14,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static com.epam.cashier.controller.service.test.util.TestDataUtil.LOGIN;
@@ -36,7 +33,6 @@ class UserServiceImplTest {
     private UserServiceImpl userService;
     @Mock
     private UserRepository userRepository;
-
     @Mock
     private RoleRepository roleRepository;
 
@@ -123,7 +119,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    public void listUsersTest(){
+    public void listUsersTest() {
         Pageable paging = PageRequest.of(0, 3, Sort.by("login"));
         userRepository.findAll(paging);
         verify(userRepository, times(1)).findAll(paging);

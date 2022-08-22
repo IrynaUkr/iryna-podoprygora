@@ -3,7 +3,6 @@ package com.epam.cashier.controller.service.impl;
 import static com.epam.cashier.controller.service.test.util.TestDataUtil.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasProperty;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -17,15 +16,12 @@ import com.epam.cashier.controller.service.model.Payment;
 import com.epam.cashier.controller.service.repository.OperationStatusRepository;
 import com.epam.cashier.controller.service.repository.PaymentRepository;
 import com.epam.cashier.controller.service.test.util.TestDataUtil;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.OngoingStubbing;
 
-import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)

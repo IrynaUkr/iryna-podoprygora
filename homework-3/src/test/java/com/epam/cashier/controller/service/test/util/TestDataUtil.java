@@ -2,14 +2,8 @@ package com.epam.cashier.controller.service.test.util;
 
 import com.epam.cashier.controller.dto.PaymentDto;
 import com.epam.cashier.controller.dto.UserDto;
-import com.epam.cashier.controller.service.model.OperationStatus;
-import com.epam.cashier.controller.service.model.Payment;
-import com.epam.cashier.controller.service.model.Role;
-import com.epam.cashier.controller.service.model.User;
+import com.epam.cashier.controller.service.model.*;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor
 public class TestDataUtil {
@@ -20,6 +14,9 @@ public class TestDataUtil {
     private static final OperationStatus created = new OperationStatus();
     public static final String PAYMENT_NUMBER = "ABC123-1";
     public static final String PAYMENT_DESCRIPTION = "payment for 123-1 bill";
+    public static final String PRODUCT_CODE = "QWE12";
+    public static final String PRODUCT_NAME = "chocolate";
+    public static final int PRODUCT_ID = 1;
 
     public static User createUserCashier() {
         cashier.setRoleName("cashier");
@@ -55,6 +52,15 @@ public class TestDataUtil {
                 .description(PAYMENT_DESCRIPTION)
                 .value(100.00)
                 .status(created)
+                .build();
+    }
+    public static Product createProduct(){
+       return Product.builder()
+                .amount(30.00)
+                .name(PRODUCT_NAME)
+                .code(PRODUCT_CODE)
+                .price(10.00)
+                .productId(PRODUCT_ID)
                 .build();
     }
 }
