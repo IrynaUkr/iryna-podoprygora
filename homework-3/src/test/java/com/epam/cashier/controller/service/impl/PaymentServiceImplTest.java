@@ -22,6 +22,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
@@ -119,8 +121,18 @@ class PaymentServiceImplTest {
 
     @Test
     void listPaymentTest(){
-        paymentService.listPayment();
+        List<Payment> testPayments = new ArrayList<>();
+        Payment payment = createPayment();
+        testPayments.add(payment);
+        List<PaymentDto> testPaymentDtos = PaymentMapper.INSTANCE.mapToListPaymentDtoes(testPayments);
+        when(paymentRepository.findAll()).thenReturn(testPayments);
+
+        List<PaymentDto> paymentDtos = paymentService.listPayment();
         verify(paymentRepository, times(1)).findAll();
+        assertThat(testPaymentDtos.size(), equalTo(paymentDtos.size()));
+        for(int i = 0; i< testPaymentDtos.size(); i++){
+            assertThat(testPaymentDtos.get(i), equalTo(paymentDtos.get(i)));
+        }
     }
 
 

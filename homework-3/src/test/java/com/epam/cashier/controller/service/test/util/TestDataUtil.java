@@ -1,6 +1,7 @@
 package com.epam.cashier.controller.service.test.util;
 
 import com.epam.cashier.controller.dto.PaymentDto;
+import com.epam.cashier.controller.dto.ProductDto;
 import com.epam.cashier.controller.dto.UserDto;
 import com.epam.cashier.controller.service.model.*;
 import lombok.NoArgsConstructor;
@@ -63,4 +64,14 @@ public class TestDataUtil {
                 .productId(PRODUCT_ID)
                 .build();
     }
+    public static ProductDto createProductDto(){
+        return ProductDto.builder()
+                .amount(30.00)
+                .name(PRODUCT_NAME)
+                .code(PRODUCT_CODE)
+                .price(10.00)
+                .productId(PRODUCT_ID)
+                .build();
+    }
+
 }

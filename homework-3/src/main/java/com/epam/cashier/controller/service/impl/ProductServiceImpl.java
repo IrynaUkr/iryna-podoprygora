@@ -45,9 +45,9 @@ public class ProductServiceImpl implements ProductService {
             throw new ProductAlreadyExistException();
         } else {
             Product product = ProductMapper.INSTANCE.mapToProduct(productDTO);
-            productRepository.save(product);
+            Product saved = productRepository.save(product);
             log.info("Product was created");
-            return ProductMapper.INSTANCE.mapToProductDto(product);
+            return ProductMapper.INSTANCE.mapToProductDto(saved);
         }
     }
 
@@ -58,8 +58,8 @@ public class ProductServiceImpl implements ProductService {
         Product persistedProduct = productRepository.findByCode(code)
                 .orElseThrow(ProductNotFoundException::new);
         Product updatedProduct = mapPresentProductFieldsProductDtoFields(persistedProduct, productDTO);
-        productRepository.save(updatedProduct);
-        return ProductMapper.INSTANCE.mapToProductDto(updatedProduct);
+        Product saved = productRepository.save(updatedProduct);
+        return ProductMapper.INSTANCE.mapToProductDto(saved);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class ProductServiceImpl implements ProductService {
         if (Objects.nonNull(price)) {
             product.setPrice(price);
         }
-        Double amount = product.getAmount();
+        Double amount = productDto.getAmount();
         if (Objects.nonNull(amount)) {
             product.setAmount(amount);
         }

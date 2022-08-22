@@ -14,9 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 
 import java.util.Optional;
 
@@ -118,10 +116,4 @@ class UserServiceImplTest {
         assertThrows(UserNotFoundException.class, () -> userService.deleteUser(testUser.getLogin()));
     }
 
-    @Test
-    public void listUsersTest() {
-        Pageable paging = PageRequest.of(0, 3, Sort.by("login"));
-        userRepository.findAll(paging);
-        verify(userRepository, times(1)).findAll(paging);
-    }
 }
