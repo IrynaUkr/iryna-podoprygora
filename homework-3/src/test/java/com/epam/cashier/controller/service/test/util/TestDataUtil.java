@@ -8,6 +8,9 @@ import com.epam.cashier.controller.service.model.Role;
 import com.epam.cashier.controller.service.model.User;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor
 public class TestDataUtil {
     public static final String LOGIN = "login";

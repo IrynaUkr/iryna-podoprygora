@@ -23,7 +23,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.OngoingStubbing;
 
+import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
@@ -117,6 +119,12 @@ class PaymentServiceImplTest {
 
         assertThrows(PaymentNotFoundException.class,
                 ()-> paymentService.deletePayment(PAYMENT_NUMBER));
+    }
+
+    @Test
+    void listPaymentTest(){
+        paymentService.listPayment();
+        verify(paymentRepository, times(1)).findAll();
     }
 
 
