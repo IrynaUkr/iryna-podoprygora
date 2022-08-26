@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/product")
 @RequiredArgsConstructor
 @Api(tags = "API description for SWAGGER documentation Product")
 @ApiResponses({
@@ -29,21 +29,21 @@ public class ProductController {
 
     @ApiOperation("get all products")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/product")
+    @GetMapping()
     public List<ProductDto> getAllproducts() {
         return productService.listProduct();
     }
 
     @ApiOperation("create product")
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/product")
+    @PostMapping()
     public ProductDto createProduct(@RequestBody @Validated(OnCreate.class) ProductDto productDto) {
         return productService.createProduct(productDto);
     }
 
     @ApiOperation("update product")
     @ResponseStatus(HttpStatus.OK)
-    @PatchMapping(value = "/product/{code}")
+    @PatchMapping(value = "/{code}")
     public ProductDto updateProduct(@PathVariable String code,
                                     @RequestBody @Validated(OnUpdate.class) ProductDto productDto) {
         return productService.updateProduct(code, productDto);
@@ -51,13 +51,13 @@ public class ProductController {
 
     @ApiOperation("get product by id")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/product/{id}")
+    @GetMapping("/{id}")
     public ProductDto getProduct(@PathVariable int id) {
-        return productService.getProduct(id);
+        return productService.getProductById(id);
     }
 
     @ApiOperation("delete product by code")
-    @DeleteMapping("/product/{code}")
+    @DeleteMapping("/{code}")
     public ResponseEntity<Void> deleteUser(@PathVariable String code) {
         productService.deleteProduct(code);
         return ResponseEntity.noContent().build();

@@ -6,7 +6,7 @@ import com.epam.cashier.controller.service.model.User;
 import java.util.List;
 
 public interface UserService {
-    UserDto getUser(String email);
+    UserDto getUserByEmail(String email);
 
     List<UserDto> listUsers();
 
@@ -20,5 +20,5 @@ public interface UserService {
 
     void deleteUser(String email);
 
-    User mapPresentUserFieldsUserDtoFields(User user, UserDto userDto) ;
+    User mapPresentUserFieldsUserDtoFields(User user, UserDto userDto);
 }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
 @Api(tags = "API description for SWAGGER documentation User")
 @ApiResponses({
@@ -29,47 +29,47 @@ public class UserController {
 
     @ApiOperation("get all users")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/user")
+    @GetMapping()
     public List<UserDto> getAllUsers() {
         return userService.listUsers();
     }
     @ApiOperation("get all usersCashiers")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/user/cashier")
+    @GetMapping("cashier")
     public List<UserDto> getAllUsersCashiers() {
         return userService.listUsersCashiers();
     }
 
     @ApiOperation("get all usersCashiers")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/user/merch")
+    @GetMapping("merch")
     public List<UserDto> getAllUsersMerchandisers() {
         return userService.listUsersMerchandisers();
     }
 
     @ApiOperation("create user")
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/user")
+    @PostMapping()
     public UserDto createUser(@RequestBody @Validated(OnCreate.class) UserDto userDto) {
         return userService.createUser(userDto);
     }
 
     @ApiOperation("update user by login")
     @ResponseStatus(HttpStatus.OK)
-    @PatchMapping (value = "/user/{login}")
+    @PatchMapping (value = "/{login}")
     public UserDto updateUser(@PathVariable @Validated(OnUpdate.class) String login, @RequestBody UserDto userDto) {
         return userService.updateUser(login, userDto);
     }
 
     @ApiOperation("get user")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/user/{login}")
+    @GetMapping("/{login}")
     public UserDto getUser(@PathVariable String login) {
-        return userService.getUser(login);
+        return userService.getUserByEmail(login);
     }
 
     @ApiOperation("delete user")
-    @DeleteMapping("/user/{login}")
+    @DeleteMapping("/{login}")
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {
         userService.deleteUser(login);
         return ResponseEntity.noContent().build();

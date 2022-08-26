@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
 
     @Override
-    public UserDto getUser(String login) {
+    public UserDto getUserByEmail(String login) {
         log.info("Finding user by login");
         User user = userRepository.findByLogin(login)
                 .orElseThrow(ReceiptNotFoundException::new);
