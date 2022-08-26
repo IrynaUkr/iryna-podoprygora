@@ -12,7 +12,6 @@ public interface UserService {
 
     List<UserDto> listUsersCashiers();
 
-    List<UserDto> listUsersMerchandisers();
 
     UserDto createUser(UserDto userDto);
 

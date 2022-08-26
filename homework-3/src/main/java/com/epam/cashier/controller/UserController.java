@@ -40,13 +40,6 @@ public class UserController {
         return userService.listUsersCashiers();
     }
 
-    @ApiOperation("get all usersCashiers")
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/user/merch")
-    public List<UserDto> getAllUsersMerchandisers() {
-        return userService.listUsersMerchandisers();
-    }
-
     @ApiOperation("create user")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/user")
@@ -69,6 +62,7 @@ public class UserController {
     }
 
     @ApiOperation("delete user")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/user/{login}")
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {
         userService.deleteUser(login);

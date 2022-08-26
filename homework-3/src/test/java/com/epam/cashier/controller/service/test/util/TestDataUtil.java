@@ -3,8 +3,12 @@ package com.epam.cashier.controller.service.test.util;
 import com.epam.cashier.controller.dto.PaymentDto;
 import com.epam.cashier.controller.dto.ProductDto;
 import com.epam.cashier.controller.dto.UserDto;
+import com.epam.cashier.controller.service.mapper.UserMapper;
 import com.epam.cashier.controller.service.model.*;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 public class TestDataUtil {
@@ -25,17 +29,30 @@ public class TestDataUtil {
                 .login(LOGIN)
                 .surname(SURNAME)
                 .role(cashier)
+                .email("coffee@gmail.com")
+                .address("Kyiv")
+                .phoneNumber("0984607617")
+                .idUser(1)
                 .build();
     }
 
     public static UserDto createUserCashierDto() {
-        cashier.setRoleName("cashier");
-        return UserDto.builder()
-                .login(LOGIN)
-                .surname(SURNAME)
-                .role(cashier)
-                .build();
+        User userCashier = createUserCashier();
+        return UserMapper.INSTANCE.mapToUserDto(userCashier);
     }
+    public static List<User> createListUsers(){
+        List<User> users = new ArrayList<>();
+        User userCashier1 = createUserCashier();
+        User userCashier2 = createUserCashier();
+        userCashier2.setIdUser(2);
+        users.add(userCashier1);
+        users.add(userCashier2);
+        return users;
+    }
+     public static List<UserDto> createListUserDtoes(){
+         List<User> listUsers = createListUsers();
+         return UserMapper.INSTANCE.mapUserDtos(listUsers);
+     }
 
     public static Payment createPayment() {
         created.setStatusName("created");

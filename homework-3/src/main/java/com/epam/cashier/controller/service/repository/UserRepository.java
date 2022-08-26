@@ -12,7 +12,6 @@ import java.util.Optional;
 public interface UserRepository extends PagingAndSortingRepository<User, Integer> {
     Optional<User> findByLogin(String login);
 
-    List<User> findAllMerchandisers();
 
     boolean deleteByLogin(String login);
 
