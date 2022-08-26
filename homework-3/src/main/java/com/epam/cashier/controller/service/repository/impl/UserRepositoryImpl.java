@@ -2,19 +2,19 @@ package com.epam.cashier.controller.service.repository.impl;
 
 import com.epam.cashier.controller.service.model.User;
 import com.epam.cashier.controller.service.repository.UserRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
 
     private final List<User> userList = new ArrayList<>();
 
     @Override
-    public User getUser(String email) {
+    public User getUserByEmail(String email) {
         return userList.stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst()

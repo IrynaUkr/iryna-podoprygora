@@ -20,7 +20,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto getProduct(int id) {
         log.info(" get Product ");
-        Product product = productRepository.getProduct(id);
+        Product product = productRepository.getProductById(id);
         return mapProductToProductDto(product);
     }
 

@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUser(String email) {
         log.info(" get Users ");
-        User user = userRepository.getUser(email);
+        User user = userRepository.getUserByEmail(email);
         return mapUserToUserDto(user);
     }
 
