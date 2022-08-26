@@ -44,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto updateProduct(int id, ProductDto productDTO) {
-        log.info("updateproduct with id {}", id);
+        log.info("update product with id {}", id);
         Product product = mapProductDtoToProduct(productDTO);
         product = productRepository.updateProduct(id, product);
         return mapProductToProductDto(product);
