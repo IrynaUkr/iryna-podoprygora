@@ -11,7 +11,6 @@ import java.util.List;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
-
     private final List<User> userList = new ArrayList<>();
 
     @Override

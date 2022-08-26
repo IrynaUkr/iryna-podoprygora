@@ -5,13 +5,13 @@ import com.epam.cashier.controller.dto.UserDto;
 import java.util.List;
 
 public interface UserService {
-    UserDto getUser(String email);
+    UserDto getUserByEmail(String email);
 
     List<UserDto> listUsers();
 
     UserDto createUser(UserDto userDto);
 
-    UserDto updateUser(String email, UserDto userDto);
+    UserDto updateUserByEmail(String email, UserDto userDto);
 
-    void deleteUser(String email);
+    void deleteUserByEmail(String email);
 }

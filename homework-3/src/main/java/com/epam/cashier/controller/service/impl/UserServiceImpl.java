@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDto getUser(String email) {
+    public UserDto getUserByEmail(String email) {
         log.info(" get Users ");
         User user = userRepository.getUserByEmail(email);
         return mapUserToUserDto(user);
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto updateUser(String email, UserDto userDto) {
+    public UserDto updateUserByEmail(String email, UserDto userDto) {
         log.info("updateUser with email {}", email);
         User user = mapUserDtoToUser(userDto);
         user = userRepository.updateUser(email, user);
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(String email) {
+    public void deleteUserByEmail(String email) {
         log.info("deleteUser with email {}", email);
         userRepository.deleteUser(email);
     }

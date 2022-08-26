@@ -30,18 +30,18 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{email}")
     public UserDto updateUser(@PathVariable String email, @RequestBody UserDto userDto) {
-        return userService.updateUser(email, userDto);
+        return userService.updateUserByEmail(email, userDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{email}")
     public UserDto getUser(@PathVariable String email) {
-        return userService.getUser(email);
+        return userService.getUserByEmail(email);
     }
 
     @DeleteMapping("/{email}")
     public ResponseEntity<Void> deleteUser(@PathVariable String email) {
-        userService.deleteUser(email);
+        userService.deleteUserByEmail(email);
         return ResponseEntity.noContent().build();
     }
 }
