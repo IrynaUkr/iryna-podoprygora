@@ -53,7 +53,7 @@ public class ProductController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/product/{id}")
     public ProductDto getProduct(@PathVariable int id) {
-        return productService.getProduct(id);
+        return productService.getProductById(id);
     }
 
     @ApiOperation("delete product by code")

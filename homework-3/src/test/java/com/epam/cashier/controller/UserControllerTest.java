@@ -74,7 +74,7 @@ class UserControllerTest {
     @Test
     void updateUser() throws Exception {
         UserDto userDto = TestDataUtil.createUserCashierDto();
-        when(userService.updateUser(LOGIN, userDto)).thenReturn(userDto);
+        when(userService.updateUserByLogin(LOGIN, userDto)).thenReturn(userDto);
 
         mockMvc.perform(patch("/api/v1/user/" + LOGIN)
                         .contentType(
@@ -90,7 +90,7 @@ class UserControllerTest {
     @Test
     void getUserTest() throws Exception {
         UserDto userDto = TestDataUtil.createUserCashierDto();
-        when(userService.getUser(userDto.getLogin())).thenReturn(userDto);
+        when(userService.getUserByLogin(userDto.getLogin())).thenReturn(userDto);
 
         mockMvc.perform(get("/api/v1/user/" + LOGIN))
                 .andDo(print())

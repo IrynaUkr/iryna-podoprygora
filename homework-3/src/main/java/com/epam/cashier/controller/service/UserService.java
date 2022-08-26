@@ -6,18 +6,17 @@ import com.epam.cashier.controller.service.model.User;
 import java.util.List;
 
 public interface UserService {
-    UserDto getUser(String login);
+    UserDto getUserByLogin(String login);
 
     List<UserDto> listUsers();
 
     List<UserDto> listUsersCashiers();
 
-
     UserDto createUser(UserDto userDto);
 
-    UserDto updateUser(String login, UserDto userDto);
+    UserDto updateUserByLogin(String login, UserDto userDto);
 
-    void deleteUser(String email);
+    void deleteUserByEmail(String email);
 
-    User mapPresentUserFieldsUserDtoFields(User user, UserDto userDto) ;
+    User mapPresentUserFieldsUserDtoFields(User user, UserDto userDto);
 }

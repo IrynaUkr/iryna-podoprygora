@@ -43,7 +43,7 @@ class PaymentServiceImplTest {
         Payment payment = TestDataUtil.createPayment();
         when(paymentRepository.findByNumber(PAYMENT_NUMBER)).thenReturn(Optional.of(payment));
 
-        PaymentDto paymentDto = paymentService.getPayment(PAYMENT_NUMBER);
+        PaymentDto paymentDto = paymentService.getPaymentByNumber(PAYMENT_NUMBER);
 
         assertThat(payment.getDescription(), equalTo(paymentDto.getDescription()));
         assertThat(payment.getValue(), equalTo(paymentDto.getValue()));
@@ -53,7 +53,7 @@ class PaymentServiceImplTest {
     void getPaymentNotFoundExceptionTest() {
         when(paymentRepository.findByNumber(PAYMENT_NUMBER)).thenReturn(Optional.empty());
 
-        assertThrows(PaymentNotFoundException.class, () -> paymentService.getPayment(PAYMENT_NUMBER));
+        assertThrows(PaymentNotFoundException.class, () -> paymentService.getPaymentByNumber(PAYMENT_NUMBER));
     }
 
     @Test
@@ -106,7 +106,7 @@ class PaymentServiceImplTest {
         Payment testPayment = createPayment();
         when(paymentRepository.findByNumber(PAYMENT_NUMBER)).thenReturn(Optional.of(testPayment));
 
-        paymentService.deletePayment(PAYMENT_NUMBER);
+        paymentService.deletePaymentByNumber(PAYMENT_NUMBER);
 
         verify(paymentRepository,times(1)).delete(testPayment);
     }
@@ -116,7 +116,7 @@ class PaymentServiceImplTest {
         when(paymentRepository.findByNumber(PAYMENT_NUMBER)).thenReturn(Optional.empty());
 
         assertThrows(PaymentNotFoundException.class,
-                ()-> paymentService.deletePayment(PAYMENT_NUMBER));
+                ()-> paymentService.deletePaymentByNumber(PAYMENT_NUMBER));
     }
 
     @Test

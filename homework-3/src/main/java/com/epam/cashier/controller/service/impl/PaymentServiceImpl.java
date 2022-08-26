@@ -30,7 +30,7 @@ public class PaymentServiceImpl implements PaymentService {
 
 
     @Override
-    public PaymentDto getPayment(String number) {
+    public PaymentDto getPaymentByNumber(String number) {
         log.info("Get payment by number:" + number);
         Payment payment = paymentRepository
                 .findByNumber(number)
@@ -97,7 +97,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public void deletePayment(String number) {
+    public void deletePaymentByNumber(String number) {
         log.info("delete payment by number {} ", number);
         Payment persistedPayment = paymentRepository
                 .findByNumber(number)

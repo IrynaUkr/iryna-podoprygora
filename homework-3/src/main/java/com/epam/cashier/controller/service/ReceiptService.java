@@ -8,7 +8,7 @@ import com.epam.cashier.controller.service.model.Receipt;
 import java.util.List;
 
 public interface ReceiptService {
-    ReceiptDto getReceipt(int id);
+    ReceiptDto getReceiptById(int id);
 
     List<ReceiptDto> listReceipt();
 
@@ -18,5 +18,5 @@ public interface ReceiptService {
 
     Receipt mupPresentReceiptFieldsDtoFields(Receipt receipt, ProductDto productDto);
 
-    void deleteReceipt(String number);
+    void deleteReceiptByNumber(String number);
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PaymentService {
 
-    PaymentDto getPayment(String number);
+    PaymentDto getPaymentByNumber(String number);
 
     List<PaymentDto> listPayment();
 
@@ -17,6 +17,6 @@ public interface PaymentService {
 
     Payment mapPresentToDtoeFields(Payment payment, PaymentDto paymentDto);
 
-    void deletePayment(String number);
+    void deletePaymentByNumber(String number);
 
 }

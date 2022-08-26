@@ -14,7 +14,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.*;
 
 import java.util.Optional;
 
@@ -38,7 +37,7 @@ class UserServiceImplTest {
     void getUserTest() {
         User user = TestDataUtil.createUserCashier();
         when(userRepository.findByLogin(LOGIN)).thenReturn(Optional.of(user));
-        UserDto userDto = userService.getUser(LOGIN);
+        UserDto userDto = userService.getUserByLogin(LOGIN);
 
         assertThat(userDto, Matchers.allOf(
                 hasProperty("login", equalTo(user.getLogin())),
@@ -49,7 +48,7 @@ class UserServiceImplTest {
     void getUserUserNotFoundTest() {
         when(userRepository.findByLogin(LOGIN)).thenReturn(Optional.empty());
         assertThrows(UserNotFoundException.class,
-                () -> userService.getUser(LOGIN));
+                () -> userService.getUserByLogin(LOGIN));
     }
 
     @Test
@@ -83,7 +82,7 @@ class UserServiceImplTest {
         when(userRepository.findByLogin(LOGIN)).thenReturn(Optional.of(testUser));
         when(userRepository.save(any())).thenReturn(testUser);
 
-        UserDto userDto = userService.updateUser(testUser.getLogin(), testUserDto);
+        UserDto userDto = userService.updateUserByLogin(testUser.getLogin(), testUserDto);
 
         assertThat(testUserDto, allOf(
                 hasProperty("login", equalTo(userDto.getLogin())),
@@ -96,7 +95,7 @@ class UserServiceImplTest {
         UserDto userDto = TestDataUtil.createUserCashierDto();
         when(userRepository.findByLogin(LOGIN)).thenReturn(Optional.empty());
 
-        assertThrows(UserNotFoundException.class, () -> userService.updateUser(LOGIN, userDto));
+        assertThrows(UserNotFoundException.class, () -> userService.updateUserByLogin(LOGIN, userDto));
     }
 
     @Test
@@ -104,7 +103,7 @@ class UserServiceImplTest {
         User testUser = TestDataUtil.createUserCashier();
         when(userRepository.findByLogin(LOGIN)).thenReturn(Optional.of(testUser));
 
-        userService.deleteUser(testUser.getLogin());
+        userService.deleteUserByEmail(testUser.getLogin());
         verify(userRepository, times(1)).delete(testUser);
     }
 
@@ -113,7 +112,7 @@ class UserServiceImplTest {
         User testUser = TestDataUtil.createUserCashier();
         when(userRepository.findByLogin(testUser.getLogin())).thenReturn(Optional.empty());
 
-        assertThrows(UserNotFoundException.class, () -> userService.deleteUser(testUser.getLogin()));
+        assertThrows(UserNotFoundException.class, () -> userService.deleteUserByEmail(testUser.getLogin()));
     }
 
 }

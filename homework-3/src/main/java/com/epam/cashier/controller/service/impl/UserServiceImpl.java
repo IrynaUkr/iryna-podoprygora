@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
 
     @Override
-    public UserDto getUser(String login) {
+    public UserDto getUserByLogin(String login) {
         log.info("Finding user by login");
         User user = userRepository.findByLogin(login)
                 .orElseThrow(UserNotFoundException::new);
@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDto updateUser(String login, UserDto userDto) {
+    public UserDto updateUserByLogin(String login, UserDto userDto) {
         log.info("Started updating user by login");
         User persistedUser = userRepository.findByLogin(login)
                 .orElseThrow(UserNotFoundException::new);
@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void deleteUser(String login) {
+    public void deleteUserByEmail(String login) {
         log.info("deleteUser with login {}", login);
         User persistedUser = userRepository.findByLogin(login)
                 .orElseThrow(UserNotFoundException::new);

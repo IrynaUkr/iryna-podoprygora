@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public ProductDto getProduct(int id) {
+    public ProductDto getProductById(int id) {
         log.info("Get Product by id: " + id);
         Product product = productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
         log.info("Product with" + id + " was found");

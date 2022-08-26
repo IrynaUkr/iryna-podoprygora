@@ -27,7 +27,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     private final ProductRepository productRepository;
 
     @Override
-    public ReceiptDto getReceipt(int id) {
+    public ReceiptDto getReceiptById(int id) {
         log.info("Finding Receipt by id ");
         Receipt receipt = receiptRepository.findByReceiptId(id)
                 .orElseThrow(ReceiptNotFoundException::new);
@@ -92,7 +92,7 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     @Transactional
-    public void deleteReceipt(String number) {
+    public void deleteReceiptByNumber(String number) {
         log.info("delete product by number {}", number);
         Receipt persistedReceipt = receiptRepository.findByNumber(number)
                 .orElseThrow(ReceiptAlreadyExistException::new);

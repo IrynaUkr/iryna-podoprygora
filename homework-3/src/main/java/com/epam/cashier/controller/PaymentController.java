@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/payment")
 @RequiredArgsConstructor
-@Api(tags = "API description for SWAGGER documentation Product")
+@Api(tags = "API description for SWAGGER documentation Payment")
 @ApiResponses({
         @ApiResponse(code = 404, message = "Not found"),
         @ApiResponse(code = 500, message = "Internal Server Error")
@@ -30,21 +30,21 @@ public class PaymentController {
 
     @ApiOperation("get all payments")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/payment")
+    @GetMapping()
     public List<PaymentDto> getAllPayments(){
         return paymentService.listPayment();
     }
 
     @ApiOperation("create payment")
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/payment")
+    @PostMapping()
     public PaymentDto createPayment(@RequestBody @Validated(OnCreate.class) PaymentDto paymentDto){
         return paymentService.createPayment(paymentDto);
     }
 
     @ApiOperation("update payment")
     @ResponseStatus(HttpStatus.OK)
-    @PatchMapping("/payment/{number}")
+    @PatchMapping("/{number}")
     public PaymentDto updatePayment(@PathVariable String number,
                                         @RequestBody @Validated(OnUpdate.class) PaymentDto paymentDto){
         return paymentService.updatePayment(number, paymentDto);
@@ -52,16 +52,16 @@ public class PaymentController {
 
     @ApiOperation("get payment by number")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/payment/{number}")
+    @GetMapping("/{number}")
     public PaymentDto getPayment(@PathVariable String number){
-        return paymentService.getPayment(number);
+        return paymentService.getPaymentByNumber(number);
     }
 
     @ApiOperation("delete payment by number")
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/payment/{number}")
+    @DeleteMapping("/{number}")
     public ResponseEntity<Void> deletePayment(@PathVariable String number) {
-        paymentService.deletePayment(number);
+        paymentService.deletePaymentByNumber(number);
         return ResponseEntity.noContent().build();
     }
 }

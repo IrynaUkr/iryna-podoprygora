@@ -37,7 +37,7 @@ class ProductServiceImplTest {
         Product testProduct = TestDataUtil.createProduct();
         ProductDto testProductDto = ProductMapper.INSTANCE.mapToProductDto(testProduct);
         when(productRepository.findById(PRODUCT_ID)).thenReturn(Optional.of(testProduct));
-        ProductDto productDto = productService.getProduct(PRODUCT_ID);
+        ProductDto productDto = productService.getProductById(PRODUCT_ID);
         assertThat(testProductDto.getProductId(), equalTo(productDto.getProductId()));
         assertThat(testProductDto.getName(), equalTo(productDto.getName()));
         assertThat(testProductDto.getCode(), equalTo(productDto.getCode()));

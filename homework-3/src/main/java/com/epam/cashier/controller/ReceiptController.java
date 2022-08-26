@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/receipt")
 @RequiredArgsConstructor
 @Api(tags = "API description for SWAGGER documentation Receipt")
 @ApiResponses({
@@ -27,29 +27,29 @@ public class ReceiptController {
 
     @ApiOperation("get all receipts")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/receipt")
+    @GetMapping()
     public List<ReceiptDto> getAllReceipts() {
         return receiptService.listReceipt();
     }
 
     @ApiOperation("create receipt")
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/receipt")
+    @PostMapping()
     public ReceiptDto createNewReceipt(@RequestBody List<ReceiptProductDto> receiptProductDtos) {
         return receiptService.createReceipt(receiptProductDtos);
     }
 
 
     @ApiOperation("get receipt by id")
-    @GetMapping(value = "/receipt/{id}")
+    @GetMapping(value = "/{id}")
     public ReceiptDto getReceipt(@PathVariable int id) {
-        return receiptService.getReceipt(id);
+        return receiptService.getReceiptById(id);
     }
 
     @ApiOperation("delete receipt by number")
-    @DeleteMapping("/receipt/{number}")
+    @DeleteMapping("/{number}")
     public ResponseEntity<Void> deleteReceipt(@PathVariable String number) {
-        receiptService.deleteReceipt(number);
+        receiptService.deleteReceiptByNumber(number);
         return ResponseEntity.noContent().build();
     }
 }
