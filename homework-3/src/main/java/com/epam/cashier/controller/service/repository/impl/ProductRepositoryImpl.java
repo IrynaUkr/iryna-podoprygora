@@ -3,12 +3,12 @@ package com.epam.cashier.controller.service.repository.impl;
 import com.epam.cashier.controller.service.exception.ProductNotFoundException;
 import com.epam.cashier.controller.service.model.Product;
 import com.epam.cashier.controller.service.repository.ProductRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Repository
 public class ProductRepositoryImpl implements ProductRepository {
     private final List<Product> productList = new ArrayList<>();
 
@@ -18,7 +18,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public Product getProduct(int id) {
+    public Product getProductById(int id) {
         return productList
                 .stream()
                 .filter(product -> product.getProductId() == id)

@@ -5,7 +5,7 @@ import com.epam.cashier.controller.service.model.User;
 import java.util.List;
 
 public interface UserRepository {
-    User getUser(String email);
+    User getUserByEmail(String email);
 
     List<User> getAllUsers();
 

@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -21,7 +20,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUser(String email) {
         log.info(" get Users ");
-        User user = userRepository.getUser(email);
+        User user = userRepository.getUserByEmail(email);
         return UserMapper.INSTANCE.mapToUserDto(user);
     }
 

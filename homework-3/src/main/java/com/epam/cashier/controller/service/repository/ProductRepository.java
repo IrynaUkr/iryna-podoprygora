@@ -1,14 +1,13 @@
 package com.epam.cashier.controller.service.repository;
 
 import com.epam.cashier.controller.service.model.Product;
-import com.epam.cashier.controller.service.model.User;
 
 import java.util.List;
 
 public interface ProductRepository {
     List<Product> getAllProducts();
 
-    Product getProduct(int id);
+    Product getProductById(int id);
 
     Product create(Product product);
 

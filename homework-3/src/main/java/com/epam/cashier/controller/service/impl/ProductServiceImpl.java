@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -21,7 +20,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto getProduct(int id) {
         log.info(" get Product ");
-        Product product = productRepository.getProduct(id);
+        Product product = productRepository.getProductById(id);
         return ProductMapper.INSTANCE.mapToProductDto(product);
     }
 
