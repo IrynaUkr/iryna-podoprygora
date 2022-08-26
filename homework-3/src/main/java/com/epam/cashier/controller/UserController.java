@@ -11,34 +11,35 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/user")
 public class UserController {
     private final UserService userService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/user")
+    @GetMapping()
     public List<UserDto> getAllUsers() {
         return userService.listUsers();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/user")
+    @PostMapping()
     public UserDto createUser(@RequestBody UserDto userDto) {
         return userService.createUser(userDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping(value = "/user/{email}")
+    @PutMapping(value = "/{email}")
     public UserDto updateUser(@PathVariable String email, @RequestBody UserDto userDto) {
         return userService.updateUser(email, userDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/user/{email}")
+    @GetMapping("/{email}")
     public UserDto getUser(@PathVariable String email) {
         return userService.getUser(email);
     }
 
-    @DeleteMapping("/user/{email}")
+    @DeleteMapping("/{email}")
     public ResponseEntity<Void> deleteUser(@PathVariable String email) {
         userService.deleteUser(email);
         return ResponseEntity.noContent().build();
