@@ -54,7 +54,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public ProductDto updateProduct(String code, ProductDto productDTO) {
-        log.info("update product with id {}", code);
+        log.info("update product with code {}", code);
         Product persistedProduct = productRepository.findByCode(code)
                 .orElseThrow(ProductNotFoundException::new);
         Product updatedProduct = mapPresentProductFieldsProductDtoFields(persistedProduct, productDTO);

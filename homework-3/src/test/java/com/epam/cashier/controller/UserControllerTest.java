@@ -41,14 +41,23 @@ class UserControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    void getAllUsers() throws Exception {
+    void getAllUsersTest() throws Exception {
         List<UserDto> listUserDtoes = TestDataUtil.createListUserDtoes();
         when(userService.listUsers()).thenReturn(listUserDtoes);
+
+        mockMvc.perform(get("/api/v1/user"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+    }
+    @Test
+    void getAllUsersCashiersTest() throws Exception {
+        List<UserDto> listUserDtoes = TestDataUtil.createListUserDtoes();
+        when(userService.listUsersCashiers()).thenReturn(listUserDtoes);
 
         mockMvc.perform(get("/api/v1/user"))
                 .andDo(print())
@@ -72,7 +81,7 @@ class UserControllerTest {
     }
 
     @Test
-    void updateUser() throws Exception {
+    void updateUserTest() throws Exception {
         UserDto userDto = TestDataUtil.createUserCashierDto();
         when(userService.updateUserByLogin(LOGIN, userDto)).thenReturn(userDto);
 
@@ -100,7 +109,8 @@ class UserControllerTest {
     }
 
     @Test
-    void deleteUser() throws Exception {
+    void deleteUserTest() throws Exception {
+        userService.getUserByLogin(LOGIN);
         mockMvc.perform(delete("/api/v1/user/" + LOGIN))
                 .andDo(print())
                 .andExpect(status().isNoContent());

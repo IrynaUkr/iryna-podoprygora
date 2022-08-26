@@ -134,6 +134,4 @@ class PaymentServiceImplTest {
             assertThat(testPaymentDtos.get(i), equalTo(paymentDtos.get(i)));
         }
     }
-
-
 }

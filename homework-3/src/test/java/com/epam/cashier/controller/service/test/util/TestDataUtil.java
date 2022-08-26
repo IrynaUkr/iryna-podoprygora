@@ -3,6 +3,7 @@ package com.epam.cashier.controller.service.test.util;
 import com.epam.cashier.controller.dto.PaymentDto;
 import com.epam.cashier.controller.dto.ProductDto;
 import com.epam.cashier.controller.dto.UserDto;
+import com.epam.cashier.controller.service.mapper.ProductMapper;
 import com.epam.cashier.controller.service.mapper.UserMapper;
 import com.epam.cashier.controller.service.model.*;
 import lombok.NoArgsConstructor;
@@ -90,5 +91,10 @@ public class TestDataUtil {
                 .productId(PRODUCT_ID)
                 .build();
     }
-
+    public static List<ProductDto>  createListProductsDtoes() {
+        Product product = TestDataUtil.createProduct();
+        List<Product> products= new ArrayList<>();
+        products.add(product);
+        return ProductMapper.INSTANCE.mapToProductDtos(products);
+    }
 }
