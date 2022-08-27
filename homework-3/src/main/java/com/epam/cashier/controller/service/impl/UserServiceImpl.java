@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDto getUser(String email) {
+    public UserDto getUserByEmail(String email) {
         log.info(" get Users ");
         User user = userRepository.getUserByEmail(email);
         return UserMapper.INSTANCE.mapToUserDto(user);

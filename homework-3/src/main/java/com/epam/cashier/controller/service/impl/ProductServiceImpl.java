@@ -18,7 +18,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public ProductDto getProduct(int id) {
+    public ProductDto getProductById(int id) {
         log.info(" get Product ");
         Product product = productRepository.getProductById(id);
         return ProductMapper.INSTANCE.mapToProductDto(product);

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
 @Api(tags = "API description for SWAGGER documentation User")
 @ApiResponses({
@@ -29,34 +29,34 @@ public class UserController {
 
     @ApiOperation("get all users")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/user")
+    @GetMapping()
     public List<UserDto> getAllUsers() {
         return userService.listUsers();
     }
 
     @ApiOperation("create user")
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/user")
+    @PostMapping()
     public UserDto createUser(@RequestBody @Validated(OnCreate.class) UserDto userDto) {
         return userService.createUser(userDto);
     }
 
     @ApiOperation("update user by email")
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping(value = "/user/{email}")
+    @PutMapping(value = "/{email}")
     public UserDto updateUser(@PathVariable @Validated(OnUpdate.class) String email, @RequestBody UserDto userDto) {
         return userService.updateUser(email, userDto);
     }
 
     @ApiOperation("get user")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/user/{email}")
+    @GetMapping("/{email}")
     public UserDto getUser(@PathVariable String email) {
-        return userService.getUser(email);
+        return userService.getUserByEmail(email);
     }
 
     @ApiOperation("delete user")
-    @DeleteMapping("/user/{email}")
+    @DeleteMapping("/{email}")
     public ResponseEntity<Void> deleteUser(@PathVariable String email) {
         userService.deleteUser(email);
         return ResponseEntity.noContent().build();
