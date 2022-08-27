@@ -2,8 +2,11 @@ package com.epam.cashier.controller.service.test.util;
 
 import com.epam.cashier.controller.dto.PaymentDto;
 import com.epam.cashier.controller.dto.ProductDto;
+import com.epam.cashier.controller.dto.ReceiptDto;
 import com.epam.cashier.controller.dto.UserDto;
+import com.epam.cashier.controller.service.mapper.PaymentMapper;
 import com.epam.cashier.controller.service.mapper.ProductMapper;
+import com.epam.cashier.controller.service.mapper.ReceiptMapper;
 import com.epam.cashier.controller.service.mapper.UserMapper;
 import com.epam.cashier.controller.service.model.*;
 import lombok.NoArgsConstructor;
@@ -17,12 +20,14 @@ public class TestDataUtil {
     private static final String SURNAME = "surname";
 
     private static final Role cashier = new Role();
-    private static final OperationStatus created = new OperationStatus();
     public static final String PAYMENT_NUMBER = "ABC123-1";
     public static final String PAYMENT_DESCRIPTION = "payment for 123-1 bill";
     public static final String PRODUCT_CODE = "QWE12";
     public static final String PRODUCT_NAME = "chocolate";
+    public static final String RECEIPT_NUMBER = "receipt1";
     public static final int PRODUCT_ID = 1;
+    public static final int RECEIPT_ID = 1;
+
 
     public static User createUserCashier() {
         cashier.setRoleName("cashier");
@@ -56,6 +61,7 @@ public class TestDataUtil {
      }
 
     public static Payment createPayment() {
+        OperationStatus created = new OperationStatus();
         created.setStatusName("created");
         return Payment.builder()
                 .number(PAYMENT_NUMBER)
@@ -65,14 +71,24 @@ public class TestDataUtil {
                 .build();
     }
     public static PaymentDto createPaymentDto() {
-        created.setStatusName("created");
-        return PaymentDto.builder()
-                .number(PAYMENT_NUMBER)
-                .description(PAYMENT_DESCRIPTION)
-                .value(100.00)
-                .status(created)
-                .build();
+        Payment payment = createPayment();
+        return PaymentMapper.INSTANCE.mapToPaymentDto(payment);
     }
+     public static List<Payment> createPaymentList(){
+         Payment payment1 = createPayment();
+         payment1.setValue(10.00);
+         Payment payment2 = createPayment();
+         payment2.setValue(100.00);
+         List<Payment> payments = new ArrayList<>();
+         payments.add(payment1);
+         payments.add(payment2);
+         return payments;
+     }
+     public static List<PaymentDto> createPaymentDtosList(){
+         List<Payment> paymentList = createPaymentList();
+        return PaymentMapper.INSTANCE.mapToListPaymentDtoes(paymentList);
+     }
+
     public static Product createProduct(){
        return Product.builder()
                 .amount(30.00)
@@ -96,5 +112,16 @@ public class TestDataUtil {
         List<Product> products= new ArrayList<>();
         products.add(product);
         return ProductMapper.INSTANCE.mapToProductDtos(products);
+    }
+    public static Receipt createReceipt(){
+      return   Receipt.builder()
+                .receiptId(RECEIPT_ID)
+                .number(RECEIPT_NUMBER)
+                .operationType(OperationType.SALE)
+                .build();
+    }
+    public static ReceiptDto createReceiptDto(){
+        Receipt receipt = createReceipt();
+        return ReceiptMapper.INSTANCE.mapToReceiptDto(receipt);
     }
 }

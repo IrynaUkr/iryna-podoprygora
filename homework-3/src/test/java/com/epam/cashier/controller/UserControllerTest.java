@@ -54,6 +54,7 @@ class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
+
     @Test
     void getAllUsersCashiersTest() throws Exception {
         List<UserDto> listUserDtoes = TestDataUtil.createListUserDtoes();
@@ -70,8 +71,7 @@ class UserControllerTest {
         UserDto userDto = TestDataUtil.createUserCashierDto();
         when(userService.createUser(userDto)).thenReturn(userDto);
         mockMvc.perform(post("/api/v1/user")
-                        .contentType(
-                                MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDto)))
                 .andDo(print())
@@ -86,8 +86,7 @@ class UserControllerTest {
         when(userService.updateUserByLogin(LOGIN, userDto)).thenReturn(userDto);
 
         mockMvc.perform(patch("/api/v1/user/" + LOGIN)
-                        .contentType(
-                                MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDto)))
                 .andDo(print())
