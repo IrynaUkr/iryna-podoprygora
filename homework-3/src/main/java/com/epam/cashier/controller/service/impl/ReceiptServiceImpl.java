@@ -1,6 +1,5 @@
 package com.epam.cashier.controller.service.impl;
 
-import com.epam.cashier.controller.dto.ProductDto;
 import com.epam.cashier.controller.dto.ReceiptDto;
 import com.epam.cashier.controller.dto.ReceiptProductDto;
 import com.epam.cashier.controller.service.ReceiptService;
@@ -49,20 +48,37 @@ public class ReceiptServiceImpl implements ReceiptService {
     @Transactional
     public ReceiptDto createReceipt(List<ReceiptProductDto> receiptProductsDto) {
         log.info("creating Receipt");
-        Receipt receipt = new Receipt();
+
+        List<ReceiptProducts> receiptProducts = mapReceiptProductList(receiptProductsDto);
+        Receipt receipt = new Receipt(receiptProducts);
+
         OperationStatus status = statusRepository
                 .findByStatusName("created")
                 .orElseThrow(OperationStatusNotFoundException::new);
         receipt.setStatus(status);
+
         Receipt savedReceipt = receiptRepository.save(receipt);
-        log.info("receipt number {} was created", savedReceipt.getNumber());
-        log.info("add list of products with amount and price to receipt:");
+
         ReceiptDto receiptDto = addProductDtoOrderList(receiptProductsDto);
         receiptDto.setReceiptId(savedReceipt.getReceiptId());
         receiptDto.setStatus(status);
+        log.info("receipt number {} was created", savedReceipt.getNumber());
         return receiptDto;
     }
+
+    public List<ReceiptProducts> mapReceiptProductList(List<ReceiptProductDto> receiptProductsDto){
+        List<ReceiptProducts> result = new ArrayList<>();
+        for(ReceiptProductDto r: receiptProductsDto){
+            ReceiptProducts rp =  new ReceiptProducts();
+            rp.setProduct(r.getProduct());
+            rp.setAmount(r.getAmount());
+            rp.setPrice(r.getPrice());
+            result.add(rp);
+        }
+        return result;
+    }
     public ReceiptDto addProductDtoOrderList(List<ReceiptProductDto> receiptProductDtos) {
+        log.info("add list of products with amount and price to receipt:");
         ReceiptDto receiptDto = new ReceiptDto();
         List<ProductOrder> productOrders = new ArrayList<>();
         for (ReceiptProductDto rp : receiptProductDtos) {
@@ -77,17 +93,31 @@ public class ReceiptServiceImpl implements ReceiptService {
             productOrders.add(po);
         }
         receiptDto.setProductOrders(productOrders);
+        log.info("list products was added to receiptDto");
         return receiptDto;
     }
 
     @Override
     public ReceiptDto updateReceipt(String number, ReceiptDto receiptDto) {
+
         return null;
     }
 
     @Override
-    public Receipt mupPresentReceiptFieldsDtoFields(Receipt receipt, ProductDto productDto) {
-        return null;
+    public Receipt mupPresentReceiptFieldsDtoFields(Receipt receipt, ReceiptDto receiptDto) {
+        if(receiptDto.getStatus()!=null){
+            receipt.setStatus(receiptDto.getStatus());
+        }
+        if(receiptDto.getNumber()!=null){
+            receipt.setNumber(receiptDto.getNumber());
+        }
+        if(receiptDto.getDate()!=null){
+            receipt.setDate(receiptDto.getDate());
+        }
+
+
+
+        return receipt;
     }
 
     @Override

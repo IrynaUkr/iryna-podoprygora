@@ -29,6 +29,13 @@ public class Receipt {
     @OneToMany(mappedBy = "receipt", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ReceiptProducts> receiptProducts;
 
+    public Receipt(List<ReceiptProducts> rp){
+        for(ReceiptProducts r: rp){
+            r.setReceipt(this);
+            this.receiptProducts=rp;
+        }
+    }
+
     @Override
     public String toString() {
         return "Receipt{" +

@@ -26,6 +26,7 @@ public class ReceiptDto {
     private OperationStatus status;
     private List<ProductOrder> productOrders;
 
+
     @Override
     public String toString() {
         return "ReceiptDto{" +
