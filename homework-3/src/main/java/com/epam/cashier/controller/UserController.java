@@ -65,7 +65,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{login}")
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {
-        userService.deleteUserByEmail(login);
+        userService.deleteUserByLogin(login);
         return ResponseEntity.noContent().build();
     }
 }

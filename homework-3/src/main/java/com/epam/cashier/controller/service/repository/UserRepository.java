@@ -13,8 +13,6 @@ public interface UserRepository extends PagingAndSortingRepository<User, Integer
     Optional<User> findByLogin(String login);
 
 
-    boolean deleteByLogin(String login);
-
     boolean existsByLogin(String login);
 
     @Query(

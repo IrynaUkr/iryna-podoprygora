@@ -1,9 +1,7 @@
 package com.epam.cashier.controller.service.mapper;
 
 import com.epam.cashier.controller.dto.ReceiptDto;
-import com.epam.cashier.controller.dto.ReceiptProductDto;
 import com.epam.cashier.controller.service.model.Receipt;
-import com.epam.cashier.controller.service.model.ReceiptProducts;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -16,4 +14,5 @@ public interface ReceiptMapper {
     ReceiptDto mapToReceiptDto(Receipt receipt);
 
     List<ReceiptDto> mapToReceiptDtos(List<Receipt> receipts);
+
 }

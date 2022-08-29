@@ -1,9 +1,6 @@
 package com.epam.cashier.controller.service.test.util;
 
-import com.epam.cashier.controller.dto.PaymentDto;
-import com.epam.cashier.controller.dto.ProductDto;
-import com.epam.cashier.controller.dto.ReceiptDto;
-import com.epam.cashier.controller.dto.UserDto;
+import com.epam.cashier.controller.dto.*;
 import com.epam.cashier.controller.service.mapper.PaymentMapper;
 import com.epam.cashier.controller.service.mapper.ProductMapper;
 import com.epam.cashier.controller.service.mapper.ReceiptMapper;
@@ -36,7 +33,6 @@ public class TestDataUtil {
                 .surname(SURNAME)
                 .role(cashier)
                 .email("coffee@gmail.com")
-                .address("Kyiv")
                 .phoneNumber("0984607617")
                 .idUser(1)
                 .build();
@@ -46,7 +42,8 @@ public class TestDataUtil {
         User userCashier = createUserCashier();
         return UserMapper.INSTANCE.mapToUserDto(userCashier);
     }
-    public static List<User> createListUsers(){
+
+    public static List<User> createListUsers() {
         List<User> users = new ArrayList<>();
         User userCashier1 = createUserCashier();
         User userCashier2 = createUserCashier();
@@ -55,10 +52,11 @@ public class TestDataUtil {
         users.add(userCashier2);
         return users;
     }
-     public static List<UserDto> createListUserDtoes(){
-         List<User> listUsers = createListUsers();
-         return UserMapper.INSTANCE.mapUserDtos(listUsers);
-     }
+
+    public static List<UserDto> createListUserDtoes() {
+        List<User> listUsers = createListUsers();
+        return UserMapper.INSTANCE.mapUserDtos(listUsers);
+    }
 
     public static Payment createPayment() {
         OperationStatus created = new OperationStatus();
@@ -70,27 +68,30 @@ public class TestDataUtil {
                 .status(created)
                 .build();
     }
+
     public static PaymentDto createPaymentDto() {
         Payment payment = createPayment();
         return PaymentMapper.INSTANCE.mapToPaymentDto(payment);
     }
-     public static List<Payment> createPaymentList(){
-         Payment payment1 = createPayment();
-         payment1.setValue(10.00);
-         Payment payment2 = createPayment();
-         payment2.setValue(100.00);
-         List<Payment> payments = new ArrayList<>();
-         payments.add(payment1);
-         payments.add(payment2);
-         return payments;
-     }
-     public static List<PaymentDto> createPaymentDtosList(){
-         List<Payment> paymentList = createPaymentList();
-        return PaymentMapper.INSTANCE.mapToListPaymentDtoes(paymentList);
-     }
 
-    public static Product createProduct(){
-       return Product.builder()
+    public static List<Payment> createPaymentList() {
+        Payment payment1 = createPayment();
+        payment1.setValue(10.00);
+        Payment payment2 = createPayment();
+        payment2.setValue(100.00);
+        List<Payment> payments = new ArrayList<>();
+        payments.add(payment1);
+        payments.add(payment2);
+        return payments;
+    }
+
+    public static List<PaymentDto> createPaymentDtosList() {
+        List<Payment> paymentList = createPaymentList();
+        return PaymentMapper.INSTANCE.mapToListPaymentDtoes(paymentList);
+    }
+
+    public static Product createProduct() {
+        return Product.builder()
                 .amount(30.00)
                 .name(PRODUCT_NAME)
                 .code(PRODUCT_CODE)
@@ -98,7 +99,8 @@ public class TestDataUtil {
                 .productId(PRODUCT_ID)
                 .build();
     }
-    public static ProductDto createProductDto(){
+
+    public static ProductDto createProductDto() {
         return ProductDto.builder()
                 .amount(30.00)
                 .name(PRODUCT_NAME)
@@ -107,21 +109,50 @@ public class TestDataUtil {
                 .productId(PRODUCT_ID)
                 .build();
     }
-    public static List<ProductDto>  createListProductsDtoes() {
+
+    public static List<ProductDto> createListProductsDtoes() {
         Product product = TestDataUtil.createProduct();
-        List<Product> products= new ArrayList<>();
+        List<Product> products = new ArrayList<>();
         products.add(product);
         return ProductMapper.INSTANCE.mapToProductDtos(products);
     }
-    public static Receipt createReceipt(){
-      return   Receipt.builder()
-                .receiptId(RECEIPT_ID)
+
+    public static Receipt createReceipt() {
+        OperationStatus created = new OperationStatus();
+        created.setStatusName("created");
+        return Receipt.builder()
                 .number(RECEIPT_NUMBER)
+                .status(created)
                 .operationType(OperationType.SALE)
                 .build();
     }
-    public static ReceiptDto createReceiptDto(){
+
+    public static ReceiptDto createReceiptDto() {
         Receipt receipt = createReceipt();
         return ReceiptMapper.INSTANCE.mapToReceiptDto(receipt);
+    }
+
+    public static List<Receipt> createListReceipt() {
+        Receipt r1 = createReceipt();
+        Receipt r2 = createReceipt();
+        r2.setNumber("22a");
+        List<Receipt> dtoList = new ArrayList<>();
+        dtoList.add(r1);
+        dtoList.add(r2);
+        return dtoList;
+    }
+    public static ReceiptProductDto createReceiptProductDto(){
+        return ReceiptProductDto.builder()
+                .id(1)
+                .amount(100.00)
+                .product(createProduct())
+                .price(20.00)
+                .build();
+    }
+    public static List<ReceiptProductDto> createListReceiptProductDto(){
+        ReceiptProductDto r1 = createReceiptProductDto();
+        List<ReceiptProductDto> rp = new ArrayList<>();
+        rp.add(r1);
+        return rp;
     }
 }

@@ -25,6 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
+
 class UserServiceImplTest {
     @InjectMocks
     private UserServiceImpl userService;
@@ -103,7 +104,7 @@ class UserServiceImplTest {
         User testUser = TestDataUtil.createUserCashier();
         when(userRepository.findByLogin(LOGIN)).thenReturn(Optional.of(testUser));
 
-        userService.deleteUserByEmail(testUser.getLogin());
+        userService.deleteUserByLogin(testUser.getLogin());
         verify(userRepository, times(1)).delete(testUser);
     }
 
@@ -112,7 +113,7 @@ class UserServiceImplTest {
         User testUser = TestDataUtil.createUserCashier();
         when(userRepository.findByLogin(testUser.getLogin())).thenReturn(Optional.empty());
 
-        assertThrows(UserNotFoundException.class, () -> userService.deleteUserByEmail(testUser.getLogin()));
+        assertThrows(UserNotFoundException.class, () -> userService.deleteUserByLogin(testUser.getLogin()));
     }
 
 }

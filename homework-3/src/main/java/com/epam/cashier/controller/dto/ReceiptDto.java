@@ -1,7 +1,7 @@
 package com.epam.cashier.controller.dto;
 
 import com.epam.cashier.controller.service.model.OperationStatus;
-import com.epam.cashier.controller.service.model.ProductOrder;
+import com.epam.cashier.controller.service.model.ReceiptProducts;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +24,7 @@ public class ReceiptDto {
     private Date date;
     private Integer idUser;
     private OperationStatus status;
-    private List<ProductOrder> productOrders;
+    private List<ReceiptProducts> receiptProductsList;
 
 
     @Override

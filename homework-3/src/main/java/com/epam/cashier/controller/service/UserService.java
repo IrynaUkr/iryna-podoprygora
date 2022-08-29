@@ -16,7 +16,7 @@ public interface UserService {
 
     UserDto updateUserByLogin(String login, UserDto userDto);
 
-    void deleteUserByEmail(String email);
+    void deleteUserByLogin(String email);
 
     User mapPresentUserFieldsUserDtoFields(User user, UserDto userDto);
 }

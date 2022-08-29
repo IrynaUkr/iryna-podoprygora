@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void deleteUserByEmail(String login) {
+    public void deleteUserByLogin(String login) {
         log.info("deleteUser with login {}", login);
         User persistedUser = userRepository.findByLogin(login)
                 .orElseThrow(UserNotFoundException::new);
